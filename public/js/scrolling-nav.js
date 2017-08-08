@@ -9,6 +9,11 @@ $(window).scroll(function() {
 
 }
 );
+$('ul.nav li.dropdown').hover(function() {
+    $(this).find('.dropdown-menu').stop(true, true).delay(50).fadeIn(50);
+}, function() {
+    $(this).find('.dropdown-menu').stop(true, true).delay(50).fadeOut(50);
+});
 //jQuery for page scrolling feature - requires jQuery Easing plugin
 $(function() {
     $(document).on('click', 'a.page-scroll', function(event) {

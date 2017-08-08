@@ -17,3 +17,4 @@ Route::get('/', function () {
 });
 */
 Route::get('/','layoutController@home');
+Route::get('Category','layoutController@Category');

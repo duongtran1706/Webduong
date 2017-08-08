@@ -14,8 +14,15 @@
                 <span>Tin Nổi Bật</span>
             </h3>
         </div>
-        <ul class="cate-more-wapper">
+        <ul class="cate-more-wapper clearfix">
             <span>code vào đây</span>
+            @foreach($post as $posts)
+                <li class="pt_post clearfix">
+                    <a href="#">
+                        {{$posts->Title}}
+                    </a>
+                </li>
+            @endforeach
         </ul>
 
 

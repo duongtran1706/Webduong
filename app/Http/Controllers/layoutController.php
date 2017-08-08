@@ -7,6 +7,7 @@
  */
 namespace App\Http\Controllers;
 use App\Category;
+use App\post;
 use Illuminate\Http\Request;
 class layoutController extends Controller{
     public function Category($slug){
@@ -17,6 +18,7 @@ class layoutController extends Controller{
     }
     public function home(){
         $category=Category::all();
-        return view('Layout.Layout',['category'=>$category]);
+        $post=post::all();
+        return view('Layout.Layout',['category'=>$category,'post'=>$post]);
     }
 }
