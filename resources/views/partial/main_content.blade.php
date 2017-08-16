@@ -6,21 +6,19 @@
  * Time: 9:21 PM
  */
 ?>
-<section id="slider" class="slider">
-    <div class="slider_overlay">
-        <div class="container">
-            <div class="row">
-                <div class="main_slider text-center">
-                    <div class="col-md-12">
-                        <div class="main_slider_content wow zoomIn" data-wow-duration="1s">
-                            <h1>Foody Love</h1>
-                            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi. </p>
-                            <button href="" class="btn-lg">Click here</button>
-                        </div>
-                    </div>
-                </div>
+<div id="touch-slider" class="carousel bs-slider fade control-round indicators-line" data-ride="carousel" data-pause="hover" data-interval="5000">
+<!-- indicators-->
+    <ol class="carousel-indicators">
+        <?php $i=0?>
+        @while($i<count($post))
+            @if ($i==0)
+            <li data-target="#touch-silder" data-slide-to="{{$i}}"  class="active" ></li>
+            @else
+                <li data-target="#touch-silder" data-slide-to="{{$i}}" ></li>
+            @endif
+            <?php $i++ ?>
+        @endwhile
 
-            </div>
-        </div>
-    </div>
-</section>
+
+    </ol>
+</div>

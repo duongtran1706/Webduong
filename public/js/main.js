@@ -20,7 +20,7 @@ jQuery(document).ready(function ($) {
 		return false;
 	});
 
-	jQuery('.nav a').bind('click', function () {
+	jQuery('.nav a').bind('hover', function () {
 		$('html , body').stop().animate({
 			scrollTop: $($(this).attr('href')).offset().top - 80
 		}, 1500, 'easeInOutExpo');

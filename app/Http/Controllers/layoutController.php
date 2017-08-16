@@ -18,7 +18,7 @@ class layoutController extends Controller{
     }
     public function home(){
         $category=Category::all();
-        $post=post::all();
+        $post=post::all()->take(5);
         return view('Layout.Layout',['category'=>$category,'post'=>$post]);
     }
 }

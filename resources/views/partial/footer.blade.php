@@ -106,8 +106,8 @@
 <script src="{{asset('js/jquery-1.11.2.min.js')}}"></script>
 <script src=" {{asset('js/jquery.js')}}"></script>
 <script src="{{asset('js/bootstrap.min.js')}}"></script>
-<script src="{{asset('js/jquery-easing/jquery.easing.1.3.js')}}"></script>
-<script src="{{asset('js/wow/wow.min.js')}}"></script>
+<script src="{{asset('js/jquery.easing.1.3.js')}}"></script>
+<script src="{{asset('js/wow.min.js')}}"></script>
 <script src="{{asset('js/plugins.js')}}"></script>
 <script src="{{asset('js/main.js')}}"></script>
 <script src="{{asset('js/scrolling-nav.js')}}"></script>
@@ -121,4 +121,9 @@
         ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
     })();
+</script>
+<script>
+    $(document).ready(function () {
+        $('#slider').fadeslider();
+    });
 </script>

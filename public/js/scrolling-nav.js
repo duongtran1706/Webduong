@@ -1,14 +1,4 @@
-//jQuery to collapse the navbar on scroll
-$(window).scroll(function() {
-    if ($(".navbar").offset().top > 30) {
-        $(".navbar-fixed-top").addClass("top-nav-collapse");
-    } else {
-        $(".navbar-fixed-top").removeClass("top-nav-collapse");
 
-    }
-
-}
-);
 $('ul.nav li.dropdown').hover(function() {
     $(this).find('.dropdown-menu').stop(true, true).delay(50).fadeIn(50);
 }, function() {
@@ -16,7 +6,7 @@ $('ul.nav li.dropdown').hover(function() {
 });
 //jQuery for page scrolling feature - requires jQuery Easing plugin
 $(function() {
-    $(document).on('click', 'a.page-scroll', function(event) {
+    $(document).on('hover', 'a.page-scroll', function(event) {
         var $anchor = $(this);
         $('html, body').stop().animate({
             scrollTop: $($anchor.attr('href')).offset().top
@@ -52,14 +42,6 @@ $(function() {
         });
     }
 
-    // Add aria roles
-    $(".menu-item.active > a").attr("aria-current", "page");
-    $allToggles.attr({
-        "aria-haspopup": "true",
-        "aria-expanded": "false",
-        "role": "button"
-    });
-
     // Open menu on hover
     $allMenus.on("mouseenter", function(e) {
         openMenu($(this).find("[aria-expanded]"));
@@ -78,7 +60,7 @@ $(function() {
 
     // Toggle menu on click, tap, or focus + enter/space
     $allToggles
-        .on("click touchstart", function(e) {
+        .on("hover", function(e) {
             $this = $(this);
             $submenu = $this.next(".dropdown-menu");
 
@@ -106,28 +88,146 @@ $(function() {
         if (e.keyCode === 27) closeMenu($allToggles);
     });
 
-    // Close menu if focus isn't inside site navigation
-    $('.dropdown-menu').on('focusout', function(){
-        // There's a delay between focusout and re-focus
-        setTimeout( function() {
-            $focused = $(document.activeElement);
-            if($focused.closest('.navbar-fixed-top').length === 0 ) {
-                closeMenu($allToggles);
-            }
-        }, 1);
-    });
-
 })();
-$(document).ready(function(){
-    $(window).scroll(function(){
-        if ($(this).scrollTop() > 100) {
-            $('#on_top').fadeIn();
-        } else {
-            $('#on_top').fadeOut();
+
+var subu;
+var subuUl;
+var subuUlLi;
+var countChildren;
+var arrayLastEntry;
+var b;
+var newi=0;
+var currCount=0;
+
+(function($) {
+    jQuery.fn.fadeslider = function() {
+
+        //set duration time;
+        window.setInterval(setDuration, 3000);
+        function setDuration(){
+            if(currCount==0){
+                currCount=1;
+            }
+            else{
+                $(subuSliderNext);
+            }
         }
-    });
-    $('#on_top').click(function(){
-        $("html, body").animate({ scrollTop: 0 }, 600);
-        return false;
-    });
-});
+
+        subu = $(this).attr('id');
+        subuUl = $("#"+subu+' ul');
+        subuUlLi = $("#"+subu+' ul li');
+        countChildren = subuUl.children().length; //count total li
+        arrayLastEntry = countChildren-1;
+        b = subuUlLi.hide();
+
+        // push li element to array
+        var imgArr = [];
+        $(subuUlLi).each(function(){
+            imgArr.push(this);
+        });
+
+        altTextPrint();
+        function altTextPrint(){
+            var setValue = $(imgArr[newi]).find('img').attr("alt");
+            if(setValue!=0)
+            {
+                $(imgArr[newi]).append('<div class="slider-title">');
+                $('.slider-title').html(setValue).animate({'top':40+'px'},1000)
+            }
+        };
+        function subuSliderNext(){
+            $('.slider-title').remove();
+            if(arrayLastEntry>newi)
+            {
+                $(imgArr[newi]).fadeOut(0);
+                $(bulArr[newi]).removeClass('bulletactive');
+                ++newi;
+                $(imgArr[newi]).fadeIn(2000);
+                altTextPrint();
+                $(bulArr[newi]).addClass('bulletactive');
+            }
+            else{
+                $(imgArr[newi]).fadeOut(0);
+                $(bulArr[newi]).removeClass('bulletactive');
+                newi=0;
+                $(imgArr[newi]).fadeIn(2000);
+                altTextPrint();
+                $(bulArr[newi]).addClass('bulletactive');
+            }
+        };
+        function subuSlsiderPreview(){
+            $('.slider-title').remove();
+            if(newi>0)
+            {
+                $(bulArr[newi]).removeClass('bulletactive');
+                $(imgArr[newi]).fadeOut(0);
+                $(bulArr[newi-1]).addClass('bulletactive');
+                $(imgArr[newi-1]).fadeIn(1000);
+                altTextPrint();
+                --newi;
+            }
+            else
+            {
+                newi=0;
+                $(bulArr[newi]).removeClass('bulletactive');
+                $(imgArr[newi]).fadeOut(0);
+                newi=countChildren-1;
+                $(bulArr[newi]).addClass('bulletactive');
+                $(imgArr[newi]).fadeIn(1000);
+                altTextPrint();
+
+            }
+        };
+
+        var vParentDiv=$('<div id="sliderBulet"></div>');
+        $('#'+subu).append(vParentDiv);
+        for(newk=0; newk<countChildren; newk++)
+        {
+            var vChildDiv=$('<div>',{'id':'b'+newk});
+            $('#sliderBulet').append(vChildDiv);
+        }
+
+        var bulArr = [];
+        $("#sliderBulet div").each(function(){
+            bulArr.push(this);
+        });
+
+        var c = subuUlLi.first().show();
+        $(bulArr[newi]).addClass('bulletactive');
+
+        $("#sliderBulet div").on("click", function(){
+            $('.slider-title').remove();
+            var id=$(this).attr("id");
+            id = id.replace('b','');
+            if(newi<id){
+                $(imgArr[newi]).fadeOut(0);
+                $(bulArr[newi]).removeClass('bulletactive');
+                $(bulArr[id]).addClass('bulletactive');
+                $(imgArr[id]).fadeIn(1000);
+                newi=id;
+                currCount=0;
+                altTextPrint();
+            }
+            else{
+                $(imgArr[newi]).fadeOut(0);
+                $(bulArr[newi]).removeClass('bulletactive');
+                $(bulArr[id]).addClass('bulletactive');
+                $(imgArr[id]).fadeIn(1000);
+                newi=id;
+                currCount=0;
+                altTextPrint();
+            }
+        });
+        $('#'+subu).append('<a id="subuprev">','<a id="subunext">');
+        $("#subunext").on("click", function(e){
+            e.preventDefault();
+            subuSliderNext();
+            currCount=0;
+        });
+        $("#subuprev").on("click", function(e){
+            e.preventDefault();
+            subuSlsiderPreview();
+            currCount=0;
+        });
+    };
+})(jQuery);
