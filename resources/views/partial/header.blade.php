@@ -36,6 +36,12 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     <script src="{{asset('js/modernizr-2.8.3-respond-1.4.2.min.js')}}"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?callback=initMap" async defer></script>
+    <script>
+        function initialize() {
+
+        }
+    </script>
 
 </head>
 

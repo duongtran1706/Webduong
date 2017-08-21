@@ -21,4 +21,5 @@ class layoutController extends Controller{
         $post=post::all()->take(5);
         return view('Layout.Layout',['category'=>$category,'post'=>$post]);
     }
+
 }

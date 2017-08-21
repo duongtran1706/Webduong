@@ -13,15 +13,12 @@
             <div class="footer_widget_content text-center">
                 <div class="col-md-4">
                     <div class="single_widget wow fadeIn" data-wow-duration="2s">
-                        <h3>Take it easy with location</h3>
+                        <h3>Địa chỉ liên hệ:</h3>
 
                         <div class="single_widget_info">
-                            <p>112-Legere ancillae vix ne.
-
-                                <span>Te elit putent propriae eum,</span>
-                                <span>aliquip nominati</span>
-                                <span class="phone_email">phone: 00 000 000</span>
-                                <span>Email: support@templatemela.com</span></p>
+                            <p>Ktx đại học quốc gia Tp-hcm
+                                <span class="phone_email">phone: 0968752540</span>
+                                <span>Email: duongtran1706@gmail.com</span></p>
                         </div>
 
                         <div class="footer_socail_icon">
