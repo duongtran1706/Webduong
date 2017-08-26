@@ -11,6 +11,7 @@
 |
 */
 
+
 Route::get('/','layoutController@home');
 Route::get('Admin','Admin_controller@index');
 Route::get('Category','layoutController@Category');

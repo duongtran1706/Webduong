@@ -13,7 +13,8 @@ class Admin_Controller extends Controller
      */
     public function index()
     {
-        return view("Admin.Layout_Admin.Layout_Admin");
+        $category=Category::all();
+        return view("Admin.Layout_Admin.Layout_Admin",['category'=>$category]);
     }
 
     /**
