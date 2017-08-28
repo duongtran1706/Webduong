@@ -282,7 +282,7 @@ var currCount=0;
             else {
                 var parentWidth = parseInt(settings.width);
             }
-            $('<span id="guide" style="display: none; white-space: nowrap;"></span>').insertBefore(this);
+            $('<span id="guide" ad_style="display: none; white-space: nowrap;"></span>').insertBefore(this);
 
             $(this).html(doTrim(textContent, parentWidth));
 

@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
-
+namespace App\Http\Controllers\admin;
 use Illuminate\Http\Request;
-
+use App\Category;
+use auth;
+use App\Http\Controllers\Controller;
 class Admin_Controller extends Controller
 {
     /**
@@ -14,7 +15,7 @@ class Admin_Controller extends Controller
     public function index()
     {
         $category=Category::all();
-        return view("Admin.Layout_Admin.Layout_Admin",['category'=>$category]);
+        return view("Admin.Layout_Admin.Home_Layout",['category'=>$category]);
     }
 
     /**

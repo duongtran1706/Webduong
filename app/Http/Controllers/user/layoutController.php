@@ -5,10 +5,12 @@
  * Date: 6/20/2017
  * Time: 10:53 PM
  */
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\user;
+use Illuminate\Http\Request;
 use App\Category;
 use App\post;
-use Illuminate\Http\Request;
+/*use App\Http\Request;*/
+use App\Http\Controllers\Controller;
 class layoutController extends Controller{
     public function Category($slug){
         $category=Category::whereSlug($slug)->first();

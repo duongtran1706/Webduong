@@ -7,10 +7,16 @@
  */
 ?>
 <!DOCTYPE html>
-<html>
-    @include("Admin.partial_admin.header")
+<html lang="{{ config('app.locale')}}">
+    @include('Admin.partial_admin.header')
     <body>
-    @include("Admin.partial_admin.menu_admin")
-    @include("Admin.partial_admin.footer")
+    @yield('content-admin')
+    <SCRIPT LANGUAGE="JavaScript">
+        function confirmAction() {
+            return confirm("Bạn có chắc chắn muốn xóa k?")
+        }
+    </SCRIPT>
+
+    @extends('Admin.partial_admin.footer')
     </body>
 </html>
