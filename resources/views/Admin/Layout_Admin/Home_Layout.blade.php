@@ -9,5 +9,5 @@
 @extends('Admin.Layout_Admin.Layout_Admin')
 @section('title-admin','Trang chủ')
 @section('content-admin')
-    @include('Admin.partial_admin.menu_admin')
+    @include('Admin.partial_admin.menager_admin')
     @endsection

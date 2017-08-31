@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\admin;
 use Illuminate\Http\Request;
 use App\Category;
-use auth;
+use  App\Topic;
+use Auth;
 use App\Http\Controllers\Controller;
 class Admin_Controller extends Controller
 {
@@ -14,8 +15,13 @@ class Admin_Controller extends Controller
      */
     public function index()
     {
-        $category=Category::all();
-        return view("Admin.Layout_Admin.Home_Layout",['category'=>$category]);
+        if(Auth::user()->level==1) {
+            $category = Category::all();
+            $topic = Topic::all();
+            return view("Admin.Layout_Admin.Home_Layout", ['category' => $category, 'topic' => $topic]);
+        }else{
+            return view('Admin.Modules.');
+        }
     }
 
     /**

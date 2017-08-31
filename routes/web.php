@@ -8,9 +8,27 @@ Route::namespace('admin')->group(function (){
     //App\Http\Controller\admin namespace;
     Route::get('Login','LoginController@getLogin');
     Route::post('Login','LoginController@postLogin');
-    Route::post('Logout',['as'=>'Logout','uses'=>'LoginController@getLogout']);
+    Route::get('Logout',['as'=>'Logout','uses'=>'LoginController@getLogout']);
     Route::prefix('admin')->middleware('auth')->group(function (){
         Route::get('/',['uses'=>'Admin_Controller@index']);
-    });
+        /*route category */
+        Route::prefix('category')->middleware('superadmin')->group(function (){
+            Route::get('list',['as'=>'catelist','uses'=>'category_adminController@GetList']);
+            Route::get('add',['as'=>'addcate','uses'=>'category_adminController@GetAdd']);
+            Route::post('add','category_adminController@GetAdd');
+            Route::get('edit/{id}','category_adminController@GetEdit');
+            Route::post('edit/{id}','category_adminController@PostEdit');
+            Route::get('delete/{id}','category_adminController@Delete');
+        });
+        /*route topic*/
+        Route::prefix('topic')->middleware('superadmin')->group(function (){
+           Route::get('list',['as'=>'topiclist','uses'=>'Topic_AdminController@GetList']);
+            Route::get('add',['as'=>'addtopic','uses'=>'Topic_AdminController@GetAdd']);
+            Route::post('add','Topic_AdminController@GetAdd');
+            Route::get('edit/{id}','Topic_AdminController@GetEdit');
+            Route::post('edit/{id}','Topic_AdminController@PostEdit');
+            Route::get('delete/{id}','Topic_AdminController@Delete');
 
+        });
+    });
 });

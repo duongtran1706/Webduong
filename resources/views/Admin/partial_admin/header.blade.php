@@ -14,6 +14,10 @@
     <meta name="author" content="">
     <title> admin -@yield('title-admin')</title>
     <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{asset('ad-style/bower_components/metisMenu/dist/metisMenu.min.css')}}" rel="stylesheet">
+    <link href="{{asset('ad-style/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css')}}" rel="stylesheet">
+    <link href="{{asset('ad-style/bower_components/datatables-responsive/css/dataTables.responsive.css')}}" rel="stylesheet">
+
     <!--stlyle css admin-->
     <link rel="stylesheet" href="{{asset('ad-style/css/style.css')}}">
     <!-- add morris plugin-->
