@@ -21,7 +21,6 @@
         <!-- Navigation -->
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
             @include('Admin.partial_admin.menu_admin')
-
         </nav>
         <!--page list-->
         <div id="page-wrapper">

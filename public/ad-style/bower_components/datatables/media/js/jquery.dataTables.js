@@ -11112,7 +11112,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sInfoEmpty": "Showing 0 to 0 of 0 entries",
+			"sInfoEmpty": "Hiển thị 0 tới 0 của 0 mục",
 	
 	
 			/**

@@ -1,5 +1,4 @@
 <?php
-
 Route::namespace('user')->group(function (){
     Route::get('/',['as'=>'home','uses'=>'layoutController@home']);
 
@@ -22,7 +21,7 @@ Route::namespace('admin')->group(function (){
         });
         /*route topic*/
         Route::prefix('topic')->middleware('superadmin')->group(function (){
-           Route::get('list',['as'=>'topiclist','uses'=>'Topic_AdminController@GetList']);
+            Route::get('list',['as'=>'topiclist','uses'=>'Topic_AdminController@GetList']);
             Route::get('add',['as'=>'addtopic','uses'=>'Topic_AdminController@GetAdd']);
             Route::post('add','Topic_AdminController@GetAdd');
             Route::get('edit/{id}','Topic_AdminController@GetEdit');
@@ -30,5 +29,45 @@ Route::namespace('admin')->group(function (){
             Route::get('delete/{id}','Topic_AdminController@Delete');
 
         });
+//        Route::prefix('post')->middleware('superadmin')->group(function (){
+//            /*font end*/
+//            Route::prefix('FontEnd')->middleware('superadmin')->group(function (){
+//               Route::get('list',['as'=>'FontEnd.html_css','uses'=>'FontEndController@GetList']);
+//
+//                Route::get('list',['as'=>'FontEnd.html_css','uses'=>'FontEndController@GetList']);
+//            });
+//            /*back end*/
+//            Route::prefix('BackEnd')->middleware('superadmin')->group(function (){
+//                Route::get('list',['as'=>'BackEnd.html_css','uses'=>'FontEndController@GetList']);
+//            });
+//            /*database*/
+//            Route::prefix('DataBase')->middleware('superadmin')->group(function (){
+//                Route::get('list',['as'=>'BackEnd.html_css','uses'=>'FontEndController@GetList']);
+//            });
+//
+//            Route::prefix('Android')->middleware('superadmin')->group(function (){
+//                Route::get('list',['as'=>'BackEnd.html_css','uses'=>'FontEndController@GetList']);
+//            });
+//
+//            Route::prefix('IOS')->middleware('superadmin')->group(function (){
+//                Route::get('list',['as'=>'BackEnd.html_css','uses'=>'FontEndController@GetList']);
+//            });
+//
+//            Route::prefix('Congnghekhac')->middleware('superadmin')->group(function (){
+//                Route::get('list',['as'=>'BackEnd.html_css','uses'=>'FontEndController@GetList']);
+//            });
+//        });
+        Route::prefix('post')->middleware('superadmin')->group(function (){
+            Route::get('{name}/list',['as'=>'postlist','uses'=>'postAdmin_controller@GetList']);
+            Route::get('{name}/edit/{id}','postAdmin_controller@GetEdit');
+            Route::post('{name}/edit/{id}','postAdmin_controller@PostEdit');
+
+        });
     });
+
+});
+
+Route::get('demo',function (){
+    $temp1=DB::table('topic')->join('post','post.topic_id','=','topic.id')->select('topic.namedescript')->where('post.id','=',33)->value('namedescript');
+    return $temp1;
 });

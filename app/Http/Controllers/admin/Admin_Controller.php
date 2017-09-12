@@ -13,12 +13,17 @@ class Admin_Controller extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public  function __construct()
+    {
+        $category = Category::all();
+        $topic = Topic::all();
+        return view()->share('category',$category,'topic',$topic);
+    }
+
     public function index()
     {
         if(Auth::user()->level==1) {
-            $category = Category::all();
-            $topic = Topic::all();
-            return view("Admin.Layout_Admin.Home_Layout", ['category' => $category, 'topic' => $topic]);
+            return view("Admin.Layout_Admin.Home_Layout");
         }else{
             return view('Admin.Modules.');
         }

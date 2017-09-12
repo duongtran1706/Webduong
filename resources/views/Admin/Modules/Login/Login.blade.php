@@ -24,13 +24,13 @@
                                     <input name="password" class="form-control" placeholder="Password" type="password">
                                     <div id="remember" class="checkbox">
                                         <label>
-                                            <input type="checkbox" value="remember-me"> Remember me
+                                            <input type="checkbox" value="remember-me"> Nhớ mật khẩu
                                         </label>
                                     </div>
-                                    <button class="btn btn-lg btn-success btn-block" type="submit">Sign in</button>
+                                    <button class="btn btn-lg btn-success btn-block" type="submit">Đăng Nhập</button>
                             </form>
                             <a href="#" class="forgot-password">
-                                Forgot the password?
+                                Quên Mật Khẩu?
                             </a>
                         </div>
                     </div>

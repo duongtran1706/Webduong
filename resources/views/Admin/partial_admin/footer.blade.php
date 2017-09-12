@@ -12,6 +12,7 @@
 <script src="{{asset('js/bootstrap.min.js')}}"></script>
 {{--custom layout js--}}
 <script src="{{asset('ad-style/js/sb-admin.js')}}"></script>
+<script src="{{asset('ad-style/js/bootstrap-datetimepicker.min.js')}}"></script>
 <script src="{{asset('ad-style/js/menu.js')}}"></script>
 <script src="{{asset('ad-style/js/metisMenu.min.js')}}"></script>
 <script src="{{asset('ad-style//bower_components/datatables/media/js/jquery.dataTables.min.js')}}"></script>
@@ -25,6 +26,14 @@
     $(document).ready(function() {
         $('#dataTables-example').DataTable({
             responsive: true
+        });
+    });
+    $(function() {
+        $('#datetimepicker1').datetimepicker({
+            language: 'pt-BR'
+        });
+        $('#datetimepicker2').datetimepicker({
+            language: 'pt-BR'
         });
     });
 </script>

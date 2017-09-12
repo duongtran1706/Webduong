@@ -3,7 +3,9 @@ html{
     height: 100%;
 }
 body {
-    background-color: #F0F0EE;
+    background-color: #FFFFFF;
+    width: 100%;
+    height: 100%;
 }
 .card-container.card {
     max-width: 350px;
@@ -19,7 +21,7 @@ body {
     cursor: default;
 }
 .navbar-fixed-top{
-    position: inherit;
+  /*  position: relative;*/
     margin: 0;
     z-index: 1000;
 }
@@ -141,10 +143,13 @@ body {
 /* doarbard*/
 
 
-
+.page-header{
+    margin-top: 60px;
+}
 @media(min-width:768px) {
     body {
         margin-top: 0;
+        width: 100%;
     }
 }
 
@@ -160,7 +165,7 @@ body {
 
 @media(min-width:768px) {
     #page-wrapper {
-        position: inherit;
+        position: relative;
         margin: 0 0 0 250px;
         padding: 0 30px;
         border-left: 1px solid #e7e7e7;
@@ -181,7 +186,7 @@ body {
     padding-top: 15px;
     padding-bottom: 15px;
     line-height: 20px;
-    color: #999;
+    color: #FFFFFF;
 }
 
 .top-nav>li>a:hover,
@@ -558,4 +563,8 @@ table.dataTable thead .sorting:after {
 
 .panel-yellow a:hover {
     color: #df8a13;
+}
+/*date time*/
+.input-append.date .add-on i, .input-prepend.date .add-on i {
+    display: inherit;
 }

@@ -11,13 +11,16 @@ use App\Http\Requests;
 use App\Category;
 use App\Http\Controllers\Controller;
 class category_adminController extends Controller{
+    public  function __construct()
+    {
+        $category = Category::all();
+        return view()->share('category',$category);
+    }
     public function  GetList(){
-        $category=Category::all();
-        return view('Admin.Modules.Category.List',['category'=>$category]);
+        return view('Admin.Modules.Category.List');
     }
     public  function GetAdd(){
-        $category=Category::all();
-        return view('Admin.Modules.Category.Add',['category'=>$category]);
+        return view('Admin.Modules.Category.Add');
     }
     public function PostAdd(Request $request){
         $this->validate($request,['catename'=>'required|unique:category,name'],['catename.required' =>  'Vui lòng nhập tên danh mục',
