@@ -44,8 +44,16 @@
                                 <input class="form-control" name="topicname" placeholder="Nhập tên chủ đề" />
                             </div>
                             <div class="form-group">
-                                <label>Danh mục Id </label>
-                                <input class="form-control" name="category_id" placeholder="Nhập tên danh mục" />
+                                <label>Miêu Tả </label>
+                                <input class="form-control" name="description" placeholder="Nhập miêu tả" />
+                            </div>
+                            <div class="form-group">
+                                <label>Danh mục:</label>
+                                <select class="form-control" name="category" id="TheLoai">
+                                    @foreach($category as $ct)
+                                        <option value="{{ $ct->id }}">{{ $ct->name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label class="radio-inline">

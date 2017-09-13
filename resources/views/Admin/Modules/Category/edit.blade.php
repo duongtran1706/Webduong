@@ -2,6 +2,15 @@
 /**
  * Created by PhpStorm.
  * User: DuongTran
+ * Date: 8/31/2017
+ * Time: 2:56 PM
+ */
+?>
+
+<?php
+/**
+ * Created by PhpStorm.
+ * User: DuongTran
  * Date: 8/30/2017
  * Time: 11:50 PM
  */
@@ -15,7 +24,9 @@
  */
 ?>
 @extends('Admin.Layout_Admin.Layout_Admin')
-@section('title-admin','Danh Sách Danh Mục')
+@section('title-admin')
+    SỬA DANH MỤC
+@endsection
 @section('content-admin')
     <div id="wrapper">
         <!-- Navigation -->
@@ -29,24 +40,29 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                           SỬA DANH MỤC
+                            SỬA DANH MỤC
                         </h1>
                         @include('Admin.blocks.error')
+                        @include('Admin.blocks.warnning')
                     </div>
                     <!-- col-lg-12-->
-                   <div class="col-lg-8" style="padding-bottom: 120px">
+                    <div class="col-lg-8" style="padding-bottom: 120px">
                         <form action="" method="POST">
                             @include('Admin.Layout_Admin.token')
                             <div class="form-group">
-                                <label>Tên danh mục</label>
-                                <input class="form-control" name="catename" value="{{$cate->name}}" placeholder="Nhập tên danh mục">
+                                <label>Tên Danh Mục</label>
+                                <input class="form-control" name="name" value="{{$cate->name}}" placeholder="Nhập Tiêu đề">
+                            </div>
+                            <div class="form-group">
+                                <label>miêu tả</label>
+                                <input class="form-control" name="Discription" value="{{$cate->Discription}}" placeholder="Nhập Tiêu đề">
                             </div>
                             <div class="form-group">
                                 <label class="radio-inline">
                                     <input name="Display" value="0" @if($cate->Display==0) checked @endif type="radio">Không hiển thị trên menu
                                 </label><br>
                                 <label class="radio-inline">
-                                    <input name="Display" value="0" @if($cate->Display==1) checked @endif type="radio"> hiển thị trên menu
+                                    <input name="Display" value="1" @if($cate->Display==1) checked @endif type="radio"> hiển thị trên menu
                                 </label>
                             </div>
                             <button type="submit" class="btn btn-default">Sửa
@@ -55,7 +71,7 @@
                             </button>
 
                         </form>
-                   </div>
+                    </div>
                 </div>
 
             </div>

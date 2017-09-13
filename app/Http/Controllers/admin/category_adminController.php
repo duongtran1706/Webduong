@@ -23,10 +23,12 @@ class category_adminController extends Controller{
         return view('Admin.Modules.Category.Add');
     }
     public function PostAdd(Request $request){
-        $this->validate($request,['catename'=>'required|unique:category,name'],['catename.required' =>  'Vui lòng nhập tên danh mục',
-            'catename.unique'   =>  'Danh mục đã tồn tại']);
+        $this->validate($request,['name'=>'required|unique:category,name'],['name.required' =>  'Vui lòng nhập tên danh mục',
+            'name.unique'   =>  'Danh mục đã tồn tại']);
         $category= new Category;
-        $category->name=$request->catename;
+        $category->name=$request->name;
+        $category->namedescript= str_slug($request->name,'_');
+        $category->Discription=$request->Discription;
         $category->Display=$request->Display;
         $category->save();
         return redirect('admin/category/list')->with('sucsses','Đã thêm thành công');

@@ -27,7 +27,7 @@ class postAdmin_controller extends Controller
         $topic=Topic::find($name);
         $temp1=DB::table('category')->join('topic','topic.category_id','=','category.id')->select('category.namedescript')->where('topic.namedescript','=',$name)->value('namedescript');
         $post=DB::table('post')->join('topic','topic.id','=','post.topic_id')->join('users','users.id','=','post.user_id')->select('post.*','users.name')->where('topic.namedescript','=',$name)->get();
-       return view('Admin.Modules.'.$temp1.'.'.$name.'.List',['topic'=>$topic,'post'=>$post]);
+       return view('Admin.Modules.'.$temp1.'.'.$name.'.List',['topic'=>$topic,'post'=>$post,'name'=>$name]);
        // return "$post";
 
     }
@@ -35,7 +35,7 @@ class postAdmin_controller extends Controller
         $post=post::find($id);
         $temp1=DB::table('category')->join('topic','topic.category_id','=','category.id')
             ->join('post','post.topic_id','=','topic.id')->select('category.namedescript')->where('post.id','=',$id)->value('namedescript');
-     return view('Admin.Modules.'.$temp1.'.'.$name.'.Edit',['post'=>$post]);
+     return view('Admin.Modules.'.$temp1.'.'.$name.'.Edit',['post'=>$post,'name'=>$name]);
 
     }
     public  function PostEdit(Request $request,$name,$id){
@@ -65,8 +65,43 @@ class postAdmin_controller extends Controller
 
         return redirect('admin/post/'.$name.'/list')->with('sucsses','Đã sửa thành công');
     }
-    public function Delete($id){
-        $post=post::find($id);
-        if(Auth::user()->id==$post->user_id||Auth::user()->level==1)
+    public function getAdd($name) {
+        $topic=Topic::find($name);
+        $temp1=DB::table('category')->join('topic','topic.category_id','=','category.id')->select('category.namedescript')->where('topic.namedescript','=',$name)->value('namedescript');
+        $post=DB::table('post')->join('topic','topic.id','=','post.topic_id')->join('users','users.id','=','post.user_id')->select('post.*','users.name')->where('topic.namedescript','=',$name)->get();
+        return view('Admin.Modules.'.$temp1.'.'.$name.'.Add',['topic'=>$topic,'post'=>$post,'name'=>$name]);
     }
+    public function PostAdd(Request $request,$name) {
+        $this->validate($request,[
+            'Title' => 'required',
+            'ContentPost' => 'required',
+        ],[
+            'Title.required' =>  'Bạn chưa nhập tiêu đề bài viết',
+            'ContentPost.required'  =>  'Bạn chưa nhập nội dung bài viết',
+        ]);
+        $topic=DB::table('topic')->select('id')->where('topic.namedescript','=',$name)->value('id');
+        $post = new post;
+        $post->Title = $request->Title;
+        $post->slug = str_slug($request->Title,'-');
+        $post->UseDescription = $request->UseDescription;
+        $post->Description = $request->Description;
+        $post->ContentPost = $request->ContentPost;
+        $post->Active=$request->Active;
+        $post->Picture = $request->Picture;
+        $post->topic_id = $topic;
+        //$post->topic_id = $topic->id;
+        $post->user_id = Auth::user()->id;
+        $post->save();
+        return redirect('admin/post/'.$name.'/list')->with('sucsses','Đã thêm thành công');
+    }
+    public function Delete($name, $id){
+        $post=post::find($id);
+        if(Auth::user()->id==$post->user_id||Auth::user()->level==1){
+         /*chỉnh sửa chổ role*/
+         $post->delete();
+         return redirect('admin/post/'.$name.'/list')->with('sucsses','Đã xóa thành công');
+        }else{
+            return redirect()->back()->with('warnning','Bạn không có quyền thực thi hành động này');
+        }
+        }
 }

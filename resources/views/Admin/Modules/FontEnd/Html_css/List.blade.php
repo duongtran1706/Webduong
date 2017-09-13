@@ -16,7 +16,9 @@
  */
 ?>
 @extends('Admin.Layout_Admin.Layout_Admin')
-@section('title-admin','Danh Sách Font End')
+@section('title-admin')
+    Danh Sách bài viết {{$name }}
+    @endsection
 @section('content-admin')
     <div id="wrapper">
         <!-- Navigation -->
@@ -30,7 +32,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            Font End
+                            Danh Sách bài viết {{$name}}
                         </h1>
                         @include('Admin.blocks.sucses')
                         @include('Admin.blocks.warnning')

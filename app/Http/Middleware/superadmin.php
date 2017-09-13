@@ -19,7 +19,7 @@ public function handle($request,Closure $next)
      if(Auth::check()&& Auth::user()->level==1){
         return $next($request);
     }else{
-        return redirect()->back()->with('warning','bạn không có quyền truy cập vào này');
+        return redirect()->back()->with('warnning','bạn không có quyền truy cập vào này');
     }
     }
 }

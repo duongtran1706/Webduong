@@ -2,12 +2,23 @@
 /**
  * Created by PhpStorm.
  * User: DuongTran
+ * Date: 8/31/2017
+ * Time: 2:56 PM
+ */
+?>
+
+<?php
+/**
+ * Created by PhpStorm.
+ * User: DuongTran
  * Date: 8/29/2017
  * Time: 10:54 PM
  */
 ?>
 @extends('Admin.Layout_Admin.Layout_Admin')
-@section('title-admin','Danh Sách Danh Mục')
+@section('title-admin')
+    Danh Sách Danh mục
+    @endsection
 @section('content-admin')
     <div id="wrapper">
         <!-- Navigation -->
@@ -21,7 +32,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            DANH MỤC
+                            Danh Sách Danh mục
                         </h1>
                         @include('Admin.blocks.sucses')
                         @include('Admin.blocks.warnning')
@@ -31,27 +42,29 @@
                         <thead>
                         <tr align="center">
                             <th>ID</th>
-                            <th>Tên danh mục</th>
-                            <th>Hiển thị menu</th>
-                            <th></th>
-                            <th></th>
+                            <th>Tên Danh Mục</th>
+                            <th>Miểu tả</th>
+                            <th>Hiển Thị</th>
+                            <th>Xóa</th>
+                            <th>Sửa</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($category as $ct)
+                        @foreach($category as $cate)
                             <tr class="odd gradeX" align="center">
-                                <td>{{$ct->id}}</td>
-                                <td>{{$ct->name}}</td>
-                                <td>@if($ct->Display==0)
+                                <td>{{$cate->id}}</td>
+                                <td><div style="height: 200px;overflow: auto">{{$cate->name}}</div></td>
+                                <td><div style="height: 200px; overflow: auto">{{$cate->Discription}}</div></td>
+                                <td>@if($cate->Display==0)
                                         Không hiển thị
                                     @else
                                         Hiển thị
                                     @endif</td>
                                 <td class="center">
-                                    <a href="delete/{{$ct->id}}" onclick="return confirmAction()"><i class="fa fa-ban" aria-hidden="true"></i>
+                                    <a href="delete/{{$cate->id}}" onclick="return confirmAction()"><i class="fa fa-ban" aria-hidden="true"></i>
                                     </a>
                                 </td>
-                                <td class="center"><a href="edit/{{ $ct->id }}"><i class="fa fa-pencil" aria-hidden="true"></i>
+                                <td class="center"><a href="edit/{{ $cate->id }}"><i class="fa fa-pencil" aria-hidden="true"></i>
                                     </a></td>
                             </tr>
                         @endforeach

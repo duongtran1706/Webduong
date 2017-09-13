@@ -11,10 +11,10 @@
 
     <ul class="nav nav-third-level">
         <li>
-            <a href=""><i class="fa fa-list-alt" aria-hidden="true"></i>Danh sách thành viên</a>
+            <a href="{{Route('userlist')}}"><i class="fa fa-list-alt" aria-hidden="true"></i>Danh sách thành viên</a>
         </li>
         <li>
-            <a href=""><i class="fa fa-plus" aria-hidden="true"></i>
+            <a href="{{Route('useradd')}}"><i class="fa fa-plus" aria-hidden="true"></i>
                 Thêm người dùng</a>
         </li>
     </ul>

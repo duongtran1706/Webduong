@@ -24,7 +24,9 @@
  */
 ?>
 @extends('Admin.Layout_Admin.Layout_Admin')
-@section('title-admin','Sửa Bài Đăng')
+@section('title-admin')
+    Sửa Bài Viết Cho {{$name }}
+@endsection
 @section('content-admin')
     <div id="wrapper">
         <!-- Navigation -->
@@ -38,7 +40,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            SỬA BÀI VIẾT
+                            SỬA BÀI VIẾT {{$name }}
                         </h1>
                         @include('Admin.blocks.error')
                         @include('Admin.blocks.warnning')
@@ -61,7 +63,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Nội dung bài viết:</label>
-                                <textarea id="textarea_full" class="form-control" row="10" name="content">{{ $post->ContentPost }}</textarea>
+                                <textarea id="textarea_full" class="form-control" row="10" name="ContentPost">{{ $post->ContentPost }}</textarea>
                             </div>
                             <div class="form-group">
                                 <label>Hình ảnh</label>

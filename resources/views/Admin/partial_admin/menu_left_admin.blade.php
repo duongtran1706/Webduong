@@ -31,7 +31,7 @@
                                     <a href="{{Route('postlist',$tp->namedescript,$cate->namedescript,$tp->id)}}"><i class="fa fa-list-alt" aria-hidden="true"></i>Danh sách {{$tp->name}}</a>
                                 </li>
                                 <li>
-                                    <a href=""><i class="fa fa-plus" aria-hidden="true"></i>
+                                    <a href="{{Route('addpost',$tp->namedescript,$cate->namedescript,$tp->id)}}"><i class="fa fa-plus" aria-hidden="true"></i>
                                         Thêm bài viết</a>
                                 </li>
                             </ul>
