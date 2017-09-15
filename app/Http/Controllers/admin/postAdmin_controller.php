@@ -35,7 +35,7 @@ class postAdmin_controller extends Controller
         if(Auth::user()->level==1)
         $post=DB::table('post')->join('topic','topic.id','=','post.topic_id')->join('users','users.id','=','post.user_id')->select('post.*','users.name')->where('topic.namedescript','=',$name)->get();
         else
-            $post=DB::table('post')->join('topic','topic.id','=','post.topic_id')->join('users','users.id','=','post.user_id')->select('post.*','users.name')->where('topic.namedescript','=','html_css')->where('users.id','=',10)->get();
+            $post=DB::table('post')->join('topic','topic.id','=','post.topic_id')->join('users','users.id','=','post.user_id')->select('post.*','users.name')->where('topic.namedescript','=',$name)->where('users.id','=',10)->get();
 
         return view('Admin.Modules.'.$temp1.'.'.$name.'.List',['topic'=>$topic,'post'=>$post,'name'=>$name]);
        // return "$post";
@@ -72,7 +72,7 @@ class postAdmin_controller extends Controller
         }
         $post->Active = $request->Active;
         if($post->save()){
-            $user=User::all();
+            $user=User::find('');
             $date=getdate();
             $string= $date['weekday']." ".$date['mday']."/".$date['mon']."/".$date['year']." ".$date['hours'].":".$date['minutes'].":".$date['seconds'];
             $data='

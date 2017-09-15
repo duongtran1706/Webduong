@@ -51,4 +51,20 @@ git push -u origin master
                            ],
   
  });
+ #Hướng Dẫn project vào máy
+ git clone https://github.com/duongtran1706/Webduong.git
  
+yêu cầu
+ 
+ PHP >= 5.6.4 , PHP Curl extension
+ Install The Dependencies
+ 
+mỡ cmd lên
+ 
+ composer install
+ 
+ php artisan key:generate
+ 
+ chạy migrate
+ 
+   php artisan migrate
