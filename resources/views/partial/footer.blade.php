@@ -108,6 +108,7 @@
 <script src="{{asset('js/plugins.js')}}"></script>
 <script src="{{asset('js/main.js')}}"></script>
 <script src="{{asset('js/scrolling-nav.js')}}"></script>
+
 <script type="text/javascript">
     var _gaq = _gaq || [];
     _gaq.push(['_setAccount', 'UA-36251023-1']);
@@ -122,5 +123,34 @@
 <script>
     $(document).ready(function () {
         $('#slider').fadeslider();
+    });
+</script>
+<script>
+    var message,ShowDiv=$('#showNotification'),count=$('#count'),c;
+    var slh= new StreamLabHtml();
+    var sls= new StreamLabSocket({
+        appId:"{{config('Stream_lab.app_id')}}",
+        channelName:"test",
+        event:"*"
+    });
+    sls.socket.onmessage=function (res) {
+        slh.setData(res);
+        if(slh.getSource()==='messages'){
+            c=parseInt(count.html());
+            count.html(c+1);
+            message=slh.getMessage();
+            ShowDiv.prepend('<li><a href="" class="unread">'+message+'</a></li>');
+        }
+    }
+    $('.notification').on('click',function () {
+        setTimeout(function () {
+            count.html(0);
+            $('.unread').each(function () {
+                $(this).removeClass('unread');
+            });
+        },500);
+        $(get('MarkAllSeen',function () {
+
+        }));
     });
 </script>

@@ -47,6 +47,7 @@ $factory->define(App\Topic::class, function (Faker\Generator $faker) {
 $factory->define(App\post::class, function (Faker\Generator $faker) {
     return [
     'Title'=>$faker->text(200),
+    'slug'=>str_slug('Title','-'),
     'Description'=>$faker->text(500),
     'UseDescription'=>$faker->text(500),
     'ContentPost'=>$faker->text(10000),
@@ -54,7 +55,7 @@ $factory->define(App\post::class, function (Faker\Generator $faker) {
     'Seen'=>1,
     'Active'=>1,
     'topic_id'=>random_int(15, 18),
-    'user_id'=>1,
+    'user_id'=>10,
 
     ];
 });

@@ -21,6 +21,8 @@
 <script src="{{asset('ad-style/js/plugins/morris/raphael.min.js')}}"></script>
 <script src="{{asset('ad-style/js/plugins/morris/morris.min.js')}}"></script>
 <script src="{{asset('ad-style/js/plugins/morris/morris-data.min.js')}}"></script>
+<script src="{{asset('ad-style/js/app.js')}}"></script>
+<script src="{{asset('StreamLab/StreamLab.js')}}"></script>
 <!-- Page-Level Demo Scripts - Tables - Use for reference -->
 <script>
     $(document).ready(function() {
@@ -35,5 +37,19 @@
         $('#datetimepicker2').datetimepicker({
             language: 'pt-BR'
         });
+    });
+</script>
+<script>
+    var count = $('#count')
+    $('.notification').on('click',function () {
+        setTimeout(function () {
+            count.html(0);
+            $('.unread').each(function () {
+                $(this).removeClass('unread');
+            });
+        },500);
+        $(get('MarkAllSeen',function () {
+
+        }));
     });
 </script>

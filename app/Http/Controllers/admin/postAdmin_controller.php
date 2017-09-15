@@ -7,6 +7,9 @@
  */
 namespace App\Http\Controllers\admin;
 
+use App\Notifications\AddpostThread;
+use App\User;
+use Faker\Provider\DateTime;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Topic;
@@ -15,6 +18,9 @@ use App\post;
 use DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
+use phpDocumentor\Reflection\Types\Null_;
+use StreamLab\StreamLabProvider\Facades\StreamLabFacades;
 
 class postAdmin_controller extends Controller
 {
@@ -26,8 +32,12 @@ class postAdmin_controller extends Controller
     public  function GetList($name){
         $topic=Topic::find($name);
         $temp1=DB::table('category')->join('topic','topic.category_id','=','category.id')->select('category.namedescript')->where('topic.namedescript','=',$name)->value('namedescript');
+        if(Auth::user()->level==1)
         $post=DB::table('post')->join('topic','topic.id','=','post.topic_id')->join('users','users.id','=','post.user_id')->select('post.*','users.name')->where('topic.namedescript','=',$name)->get();
-       return view('Admin.Modules.'.$temp1.'.'.$name.'.List',['topic'=>$topic,'post'=>$post,'name'=>$name]);
+        else
+            $post=DB::table('post')->join('topic','topic.id','=','post.topic_id')->join('users','users.id','=','post.user_id')->select('post.*','users.name')->where('topic.namedescript','=','html_css')->where('users.id','=',10)->get();
+
+        return view('Admin.Modules.'.$temp1.'.'.$name.'.List',['topic'=>$topic,'post'=>$post,'name'=>$name]);
        // return "$post";
 
     }
@@ -61,7 +71,23 @@ class postAdmin_controller extends Controller
             $post->Picture=$request->Picture;
         }
         $post->Active = $request->Active;
-        $post->save();
+        if($post->save()){
+            $user=User::all();
+            $date=getdate();
+            $string= $date['weekday']." ".$date['mday']."/".$date['mon']."/".$date['year']." ".$date['hours'].":".$date['minutes'].":".$date['seconds'];
+            $data='
+                            <div class="media">
+                                <div class="media-body">
+                                    <h5 class="media-heading"><strong>'.Auth::user()->name.'</strong>
+                                    </h5>
+                                    <p class="small text-muted"><i class="fa fa-clock-o"></i> '.$string.'</p>
+                                    <p>Sửa Bài:</p>
+                                    <p>'.$post->Title.'</p>
+                                </div>
+                            </div>
+                        ';
+            Notification::send($user, new AddpostThread($post,$data));
+        }
 
         return redirect('admin/post/'.$name.'/list')->with('sucsses','Đã sửa thành công');
     }
@@ -89,9 +115,25 @@ class postAdmin_controller extends Controller
         $post->Active=$request->Active;
         $post->Picture = $request->Picture;
         $post->topic_id = $topic;
-        //$post->topic_id = $topic->id;
+        $post->views =0;
         $post->user_id = Auth::user()->id;
-        $post->save();
+        if($post->save()){
+            $user=User::all();
+            $date=getdate();
+            $string= $date['weekday']." ".$date['mday']."/".$date['mon']."/".$date['year']." ".$date['hours'].":".$date['minutes'].":".$date['seconds'];
+            $data='
+                            <div class="media">
+                                <div class="media-body">
+                                    <h5 class="media-heading"><strong>'.Auth::user()->name.'</strong>
+                                    </h5>
+                                    <p class="small text-muted"><i class="fa fa-clock-o"></i> '.$string.'</p>
+                                    <p>Đăng bài :</p>
+                                    <p>'.$post->Title.'</p>
+                                </div>
+                            </div>
+                        ';
+            Notification::send($user, new AddpostThread($post,$data));
+        }
         return redirect('admin/post/'.$name.'/list')->with('sucsses','Đã thêm thành công');
     }
     public function Delete($name, $id){
@@ -104,4 +146,9 @@ class postAdmin_controller extends Controller
             return redirect()->back()->with('warnning','Bạn không có quyền thực thi hành động này');
         }
         }
+    public function AllSeen(){
+        foreach(auth()->user()->unreadNotifications as $note){
+            $note->markAsRead();
+        }
+    }
 }

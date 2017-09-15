@@ -15,7 +15,8 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{{url('/admin')}}">SB Admin</a>
+
+            <a class="navbar-brand" href="{{url('/admin')}}">@if(Auth::user()->level==1)  SB Admin @else SB Manager @endif</a>
         </div>
         <!-- Top Menu Items -->
         <ul class="nav navbar-right top-nav">
@@ -76,36 +77,28 @@
             </li>
             <!--message infor-->
             <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="caret"></b></a>
-                <ul class="dropdown-menu alert-dropdown">
-                    <li>
-                        <a href="#">Alert Name <span class="label label-default">Alert Badge</span></a>
-                    </li>
-                    <li>
-                        <a href="#">Alert Name <span class="label label-primary">Alert Badge</span></a>
-                    </li>
-                    <li>
-                        <a href="#">Alert Name <span class="label label-success">Alert Badge</span></a>
-                    </li>
-                    <li>
-                        <a href="#">Alert Name <span class="label label-info">Alert Badge</span></a>
-                    </li>
-                    <li>
-                        <a href="#">Alert Name <span class="label label-warning">Alert Badge</span></a>
-                    </li>
-                    <li>
-                        <a href="#">Alert Name <span class="label label-danger">Alert Badge</span></a>
-                    </li>
-                    <li class="divider"></li>
-                    <li>
-                        <a href="#">View All</a>
+                <a href="#" class="dropdown-toggle notification" data-toggle="dropdown">
+                    <i class="fa fa-bell"></i> @if(count(auth()->user()->unreadNotifications)!=0) <span id="count" class="notifi">{{count(auth()->user()->unreadNotifications)}}</span>@endif</a>
+                <!--message-->
+                <ul class="dropdown-menu message-dropdown" id="showNotification">
+                    @foreach(auth()->user()->notifications as $note)
+                        <li class="message-preview">
+                            <a href="#" class="{{ $note->read_at == null ? 'unread' : '' }}">
+                                {!! $note->data['data'] !!}
+                                <?php $note->markAsRead();?>
+                            </a>
+                        </li>
+                    @endforeach
+                    <li class="message-footer">
+                        <a href="#">Read All New Messages</a>
                     </li>
                 </ul>
+                <!--end message-->
             </li>
             <!--end info-->
             <!--login-->
             <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> John Smith <b class="caret"></b></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> {{Auth::user()->DisplayName}} <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li>
                         <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
@@ -114,7 +107,7 @@
                         <a href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
+                        <a href="#"><i class="fa fa-fw fa-gear"></i> Manager</a>
                     </li>
                     <li class="divider"></li>
                     <li>

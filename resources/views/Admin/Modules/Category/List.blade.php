@@ -53,8 +53,8 @@
                         @foreach($category as $cate)
                             <tr class="odd gradeX" align="center">
                                 <td>{{$cate->id}}</td>
-                                <td><div style="height: 200px;overflow: auto">{{$cate->name}}</div></td>
-                                <td><div style="height: 200px; overflow: auto">{{$cate->Discription}}</div></td>
+                                <td><div style="overflow: auto">{{$cate->name}}</div></td>
+                                <td><div style=" overflow: auto">{{$cate->Discription}}</div></td>
                                 <td>@if($cate->Display==0)
                                         Không hiển thị
                                     @else

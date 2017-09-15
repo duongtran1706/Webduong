@@ -15,8 +15,10 @@
             <li>
                 <a href=""><i class="fa fa-star-half-o"></i> Intro</a>
             </li>
+            @if(Auth::user()->level==1)
             @include('Admin.partial_admin.menu_category')
             @include('Admin.partial_admin.menu_topic')
+            @endif
             @foreach($category as $cate)
             <li>
                 <a href="#"><i class="fa fa-cube fa-fw"></i> {{$cate->name}}<span class="fa arrow"></span></a>
@@ -42,21 +44,10 @@
                 <!-- /.nav-second-level -->
             </li>
             @endforeach
-           {{-- @if(Auth::user()->level == 1)
-                <li>
-                    <a href="#"><i class="fa fa-users fa-fw"></i> Thành viên<span class="fa arrow"></span></a>
-                    <ul class="nav nav-second-level">
-                        <li>
-                            <a href="">Danh sách</a>
-                        </li>
-                        <li>
-                            <a href="">Thêm thành viên</a>
-                        </li>
-                    </ul>
-                    <!-- /.nav-second-level -->
-                </li>
-            @endif--}}
+           {{--Danh sach thanh vien--}}
+            @if(Auth::user()->level==1)
             @include('Admin.partial_admin.menu_users')
+                @endif
         </ul>
 
     </div>

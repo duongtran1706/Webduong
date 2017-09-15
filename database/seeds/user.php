@@ -13,14 +13,25 @@ class user extends Seeder
     {
         
        /* factory(App\User::class,4)->create();*/
+//        DB::table('users')->insert([
+//            'name'=>'duongtran',
+//            'username' => 'admin',
+//            'displayname' => 'Super Admin',
+//            'Avatar'=>'http://lorempixel.com/640/480/?51461',
+//            'Lastlogin'=>'2017-07-22',
+//            'Birthday'=>'1995-04-21',
+//            'email' => 'thanhduong@gmail.com',
+//            'password' => bcrypt('123456'),
+//        ]);
         DB::table('users')->insert([
-            'name'=>'duongtran',
-            'username' => 'admin',
-            'displayname' => 'Super Admin',
+            'name'=>'duong',
+            'username' => 'duongtt',
+            'displayname' => 'người dùng',
             'Avatar'=>'http://lorempixel.com/640/480/?51461',
             'Lastlogin'=>'2017-07-22',
             'Birthday'=>'1995-04-21',
             'email' => 'thanhduong@gmail.com',
+            'level'=>0,
             'password' => bcrypt('123456'),
         ]);
     }

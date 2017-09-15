@@ -60,12 +60,12 @@
                         @foreach($post as $pt)
                             <tr class="odd gradeX" align="center">
                                 <td>{{$pt->id}}</td>
-                                <td><div style="height: 200px;overflow: auto">{{$pt->Title}}</div></td>
-                                <td><div style="height: 200px; overflow: auto">{{$pt->UseDescription}}</div></td>
+                                <td><div style="overflow: auto">{{$pt->Title}}</div></td>
+                                <td><div style=" overflow: auto">{{$pt->UseDescription}}</div></td>
                                 <td>
-                                    <div style="height: 200px; overflow: auto">{{$pt->Description}}
+                                    <div style="overflow: auto">{{$pt->Description}}
                                     </div></td>
-                                <td><div style="height: 200px; overflow: auto">
+                                <td><div style=" overflow: auto">
                                     {{$pt->ContentPost}}
                                     </div></td>
                                 <td>{{$pt->Picture}}</td>
