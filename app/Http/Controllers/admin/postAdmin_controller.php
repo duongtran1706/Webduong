@@ -67,6 +67,8 @@ class postAdmin_controller extends Controller
     }
     public function Delete($id){
         $post=post::find($id);
-        if(Auth::user()->id==$post->user_id||Auth::user()->level==1)
+        if(Auth::user()->id==$post->user_id||Auth::user()->level==1){
+
+        }
     }
 }
