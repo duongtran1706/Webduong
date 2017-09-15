@@ -1,14 +1,16 @@
 <?php
+
 Route::namespace('user')->group(function (){
     Route::get('/',['as'=>'home','uses'=>'layoutController@home']);
 
 });
+Auth::routes();
 Route::namespace('admin')->group(function (){
     Route::get('MarkAllSeen' ,'postAdmin_controller@AllSeen');
     //App\Http\Controller\admin namespace;
-    Route::get('Login','LoginController@getLogin');
-    Route::post('Login','LoginController@postLogin');
-    Route::get('Logout',['as'=>'Logout','uses'=>'LoginController@getLogout']);
+    Route::get('ad-Login','LoginController@getLogin');
+    Route::post('ad-Login','LoginController@postLogin');
+    Route::get('ad-Logout',['as'=>'Logout','uses'=>'LoginController@getLogout']);
     Route::prefix('admin')->middleware('auth')->group(function (){
         Route::get('/',['uses'=>'DashboardController@index']);
         /*route category */
@@ -96,3 +98,8 @@ Route::get('demo',function (){
     $post=DB::table('post')->join('topic','topic.id','=','post.topic_id')->join('users','users.id','=','post.user_id')->select('post.*','users.name')->where('topic.namedescript','=','html_css')->where('users.id','=',10)->get();
     return $post;
 });
+Route::get('webcome',function (){
+        return view('welcome');
+});
+
+/*Route::get('login','admin/LoginController@getLogin');*/

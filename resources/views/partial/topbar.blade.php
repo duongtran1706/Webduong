@@ -38,22 +38,23 @@
                                                 <a href="#" class="btn btn-tw"><i class="fa fa-twitter"></i> Twitter</a>
                                             </div>
                                             or
-                                            <form class="form" role="form" method="post" action="login" accept-charset="UTF-8" id="login-nav">
+                                            <form class="form-signin" role="form" method="POST" action="{{url('Login')}}" accept-charset="UTF-8" id="login-nav">
+                                                @include('Admin.Layout_Admin.token')
                                                 <div class="form-group">
-                                                    <label class="sr-only" for="#" >Email address</label>
-                                                    <input type="email" class="form-control" id="#" placeholder="nhập tên đăng nhập" required>
+                                                    <label class="sr-only" for="#" >Tên Đăng Nhập</label>
+                                                    <input type="text" class="form-control" name="username" placeholder="nhập tên đăng nhập" autofocus>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label class="sr-only" for="exampleInputPassword2">Password</label>
-                                                    <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Nhập mật khẩu" required>
+                                                    <label class="sr-only" for="#">Mật khẩu</label>
+                                                    <input type="password"  name="password" class="form-control" id="#" placeholder="Nhập mật khẩu" autofocus>
                                                     <div class="help-block text-right"><a href="">Forget the password ?</a></div>
                                                 </div>
                                                 <div class="form-group">
                                                     <button type="submit" class="btn btn-primary btn-block">Đăng Nhập</button>
                                                 </div>
-                                                <div class="checkbox">
+                                                <div  id="remember" class="checkbox">
                                                     <label>
-                                                        <input type="checkbox"> Nhớ mật khẩu
+                                                        <input type="checkbox" value="remember-me"> Nhớ mật khẩu
                                                     </label>
                                                 </div>
                                             </form>

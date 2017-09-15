@@ -37,7 +37,8 @@ class postAdmin_controller extends Controller
         else
             $post=DB::table('post')->join('topic','topic.id','=','post.topic_id')->join('users','users.id','=','post.user_id')->select('post.*','users.name')->where('topic.namedescript','=',$name)->where('users.id','=',10)->get();
 
-        return view('Admin.Modules.'.$temp1.'.'.$name.'.List',['topic'=>$topic,'post'=>$post,'name'=>$name]);
+       /* return view('Admin.Modules.'.$temp1.'.'.$name.'.List',['topic'=>$topic,'post'=>$post,'name'=>$name]);*/
+        return view('Admin.Modules.Post.List',['topic'=>$topic,'post'=>$post,'name'=>$name]);
        // return "$post";
 
     }
@@ -45,7 +46,7 @@ class postAdmin_controller extends Controller
         $post=post::find($id);
         $temp1=DB::table('category')->join('topic','topic.category_id','=','category.id')
             ->join('post','post.topic_id','=','topic.id')->select('category.namedescript')->where('post.id','=',$id)->value('namedescript');
-     return view('Admin.Modules.'.$temp1.'.'.$name.'.Edit',['post'=>$post,'name'=>$name]);
+     return view('Admin.Modules.Post.Edit',['post'=>$post,'name'=>$name]);
 
     }
     public  function PostEdit(Request $request,$name,$id){
@@ -95,7 +96,7 @@ class postAdmin_controller extends Controller
         $topic=Topic::find($name);
         $temp1=DB::table('category')->join('topic','topic.category_id','=','category.id')->select('category.namedescript')->where('topic.namedescript','=',$name)->value('namedescript');
         $post=DB::table('post')->join('topic','topic.id','=','post.topic_id')->join('users','users.id','=','post.user_id')->select('post.*','users.name')->where('topic.namedescript','=',$name)->get();
-        return view('Admin.Modules.'.$temp1.'.'.$name.'.Add',['topic'=>$topic,'post'=>$post,'name'=>$name]);
+        return view('Admin.Modules.Post.Add',['topic'=>$topic,'post'=>$post,'name'=>$name]);
     }
     public function PostAdd(Request $request,$name) {
         $this->validate($request,[

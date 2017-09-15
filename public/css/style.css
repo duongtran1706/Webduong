@@ -1292,7 +1292,7 @@ h1 { margin:150px auto 50px auto; text-align:center; color:#fff;}
     min-width: 250px;
     padding: 14px 14px 0;
     overflow:hidden;
-    background-color:rgba(255,255,255,.8);
+    background-color:rgba(255,255,255,1.8);
 }
 #login-dp .help-block{
     font-size:12px
@@ -1307,7 +1307,7 @@ h1 { margin:150px auto 50px auto; text-align:center; color:#fff;}
     margin:12px 0
 }
 #login-dp .social-buttons a{
-    width: 49%;
+    /*width: 49%;*/
 }
 #login-dp .form-group {
     margin-bottom: 10px;
@@ -1323,6 +1323,7 @@ h1 { margin:150px auto 50px auto; text-align:center; color:#fff;}
 .btn-tw{
     color: #fff;
     background-color:#55acee;
+    margin: 0;
 }
 .btn-tw:hover{
     color: #fff;
