@@ -7,31 +7,6 @@
  */
 ?>
 
-<?php
-/**
- * Created by PhpStorm.
- * User: DuongTran
- * Date: 8/31/2017
- * Time: 2:56 PM
- */
-?>
-
-<?php
-/**
- * Created by PhpStorm.
- * User: DuongTran
- * Date: 8/30/2017
- * Time: 11:50 PM
- */
-?>
-<?php
-/**
- * Created by PhpStorm.
- * User: DuongTran
- * Date: 8/29/2017
- * Time: 10:54 PM
- */
-?>
 @extends('Admin.Layout_Admin.Layout_Admin')
 @section('title-admin')
     Thay đổi người dùng
@@ -67,7 +42,7 @@
                                 <input class="form-control" name="DisplayName" value="{{$users->DisplayName}}" placeholder="Nhập tên Đầy Đủ">
                             </div>
                             <div class="form-group">
-                                <label>Tên Đầy Đủ</label>
+                                <label>Tên Đăng Nhập</label>
                                 <input class="form-control" name="username" value="{{$users->username}}" placeholder="Nhập tên Đầy Đủ">
                             </div>
                             <div class="form-group">

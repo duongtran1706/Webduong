@@ -12,6 +12,9 @@ use App\post;
 /*use App\Http\Request;*/
 use App\Http\Controllers\Controller;
 class layoutController extends Controller{
+
+
+
     public function Category($slug){
         $category=Category::whereSlug($slug)->first();
         if($category){

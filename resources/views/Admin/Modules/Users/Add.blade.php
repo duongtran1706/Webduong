@@ -16,31 +16,6 @@
  */
 ?>
 
-<?php
-/**
- * Created by PhpStorm.
- * User: DuongTran
- * Date: 8/31/2017
- * Time: 2:56 PM
- */
-?>
-
-<?php
-/**
- * Created by PhpStorm.
- * User: DuongTran
- * Date: 8/30/2017
- * Time: 11:50 PM
- */
-?>
-<?php
-/**
- * Created by PhpStorm.
- * User: DuongTran
- * Date: 8/29/2017
- * Time: 10:54 PM
- */
-?>
 @extends('Admin.Layout_Admin.Layout_Admin')
 @section('title-admin')
     Thêm người dùng

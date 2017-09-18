@@ -26,6 +26,7 @@
                         <a href=""><i class="fa fa-youtube"></i></a>
                         <a href=""><i class="fa fa-camera"></i></a>
                         {{--<a href=""><i class="fa fa-sign-in" aria-hidden="true"></i>Đăng nhập</a>--}}
+                        @if(Auth::guest())
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-sign-in" aria-hidden="true">Đăng Nhập</i></a>
                             <ul id="login-dp" class="dropdown-menu">
@@ -38,8 +39,9 @@
                                                 <a href="#" class="btn btn-tw"><i class="fa fa-twitter"></i> Twitter</a>
                                             </div>
                                             or
-                                            <form class="form-signin" role="form" method="POST" action="{{url('Login')}}" accept-charset="UTF-8" id="login-nav">
-                                                @include('Admin.Layout_Admin.token')
+                                            <form class="form-signin" role="form" method="POST" action="{{url('/user-login')}}" accept-charset="UTF-8" id="login-nav">
+                                                <input type="hidden" name="_token" value="{{csrf_token()}}">
+                                              {{--  {{ csrf_field() }}--}}
                                                 <div class="form-group">
                                                     <label class="sr-only" for="#" >Tên Đăng Nhập</label>
                                                     <input type="text" class="form-control" name="username" placeholder="nhập tên đăng nhập" autofocus>
@@ -66,6 +68,34 @@
                                 </li>
                             </ul>
                         </li>
+                            @else
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                   @if(Auth::check()) {{ Auth::user()->name }}@endif
+                                </a>
+
+                                <ul class="dropdown-content" role="menu">
+                                    <li>
+                                        <?php $user='user?token='.Auth::user()->remember_token?>
+                                        <a href="{{url('/manager',$user)}}"><i class="fa fa-fw fa-gear"></i> Manager</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{url('/')}}"
+                                           onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                            <i class="fa fa-sign-out" aria-hidden="true"></i>
+
+                                            Logout
+                                        </a>
+                                        <form id="logout-form" action="{{url('/user-logout')}}" method="POST" style="display: none;">
+                                            {{ csrf_field() }}
+                                        </form>
+
+                                    </li>
+
+                                </ul>
+                            </li>
+                        @endif
                     </div>
                 </div>
             </div>

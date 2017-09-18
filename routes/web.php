@@ -2,9 +2,19 @@
 
 Route::namespace('user')->group(function (){
     Route::get('/',['as'=>'home','uses'=>'layoutController@home']);
+    Route::get('user-login',['as'=>'getlogin','uses'=>'LoginController@GetLogin']);
+    Route::post('user-login',['as'=>'getlogin','uses'=>'LoginController@PostLogin']);
+    Route::post('user-logout',['as'=>'getlogout','uses'=>'LoginController@getlogout']);
+    Route::get('profile',['as'=>'profile','uses'=>'userController@getprofile']);
+    Route::get('edit_user_profile/{id}',['as'=>'edit_user_profile','uses'=>'userController@geteditprofile_info']);
+    Route::post('edit_user_profile/{id}',['as'=>'edit_user_profile','uses'=>'userController@posteditprofile_info']);
 
 });
-Auth::routes();
+
+
+
+
+
 Route::namespace('admin')->group(function (){
     Route::get('MarkAllSeen' ,'postAdmin_controller@AllSeen');
     //App\Http\Controller\admin namespace;
@@ -52,48 +62,13 @@ Route::namespace('admin')->group(function (){
 
         });
 /*route manager */
-        Route::prefix('post')->middleware('manager')->group(function (){
-            Route::get('{name}/list',['as'=>'postlist','uses'=>'postAdmin_controller@GetList']);
-            Route::get('{name}/edit/{id}','postAdmin_controller@GetEdit');
-            Route::post('{name}/edit/{id}','postAdmin_controller@PostEdit');
-            Route::get('{name}/delete/{id}','postAdmin_controller@Delete');
-            Route::get('{name}/add',['as'=>'addpost','uses'=>'postAdmin_controller@GetAdd']);
-            Route::post('{name}/add','postAdmin_controller@PostAdd');
-
-        });
+    });
+    Route::prefix('manager')->middleware('auth')->group(function (){
+        Route::get('{token}',['uses'=>'DashboardController@index']);
     });
 
 });
-/*manager*/
-//Route::namespace('Manager')->group(function (){
-//    //App\Http\Controller\admin namespace;
-//    Route::get('Login','LoginController@getLogin');
-//    Route::post('Login','LoginController@postLogin');
-//    Route::get('Logout',['as'=>'Logout','uses'=>'LoginController@getLogout']);
-//    Route::prefix('admin')->middleware('auth')->group(function (){
-//        Route::get('/',['uses'=>'DashboardController@index']);
-//        /*user */
-//        Route::prefix('user')->middleware('manager')->group(function (){
-//            Route::get('list',['as'=>'userlist','uses'=>'userController@GetList']);
-//            Route::get('add',['as'=>'useradd','uses'=>'userController@GetAdd']);
-//            Route::post('add','userController@PostAdd');
-//            Route::get('edit/{id}','userController@GetEdit');
-//            Route::post('edit/{id}','userController@PostEdit');
-//            Route::get('delete/{id}','userController@Delete');
-//        });
-//
-//        Route::prefix('post')->middleware('manager')->group(function (){
-//            Route::get('{name}/list',['as'=>'postlist','uses'=>'postAdmin_controller@GetList']);
-//            Route::get('{name}/edit/{id}','postAdmin_controller@GetEdit');
-//            Route::post('{name}/edit/{id}','postAdmin_controller@PostEdit');
-//            Route::get('{name}/delete/{id}','postAdmin_controller@Delete');
-//            Route::get('{name}/add',['as'=>'addpost','uses'=>'postAdmin_controller@GetAdd']);
-//            Route::post('{name}/add','postAdmin_controller@PostAdd');
-//
-//        });
-//    });
-//
-//});
+
 Route::get('demo',function (){
     $post=DB::table('post')->join('topic','topic.id','=','post.topic_id')->join('users','users.id','=','post.user_id')->select('post.*','users.name')->where('topic.namedescript','=','html_css')->where('users.id','=',10)->get();
     return $post;

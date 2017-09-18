@@ -16,7 +16,7 @@ use App\Roles;
 class superadmin{
 public function handle($request,Closure $next)
 {
-     if(Auth::check()&& Auth::user()->level==1){
+     if((Auth::check()&& Auth::user()->level==1)||(Auth::check()&& Auth::user()->level==0)){
         return $next($request);
     }else{
         return redirect()->back()->with('warnning','bạn không có quyền truy cập vào này');
