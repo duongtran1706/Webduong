@@ -12,7 +12,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title> admin -@yield('title-admin')</title>
+    <title> @yield('title-admin')</title>
     <!--calendar-->
     <link href="{{asset('ad-style/css/bootstrap-datetimepicker.min.css')}}" rel="stylesheet">
     <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet">

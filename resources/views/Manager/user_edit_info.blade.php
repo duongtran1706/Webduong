@@ -52,7 +52,7 @@
                             <label>Tiểu Sử :</label>
                             <textarea id="textarea_full" class="form-control" row="10" name="biography">{{ $users->biography }}</textarea>
                         </div>
-                        <button type="submit" class="btn btn-default">Sửa
+                        <button type="submit" class="btn btn-default">Xác Nhận
                         </button>
 
                     </form>

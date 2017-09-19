@@ -1,19 +1,18 @@
 <?php
-
+use App\post;
 Route::namespace('user')->group(function (){
     Route::get('/',['as'=>'home','uses'=>'layoutController@home']);
     Route::get('user-login',['as'=>'getlogin','uses'=>'LoginController@GetLogin']);
     Route::post('user-login',['as'=>'getlogin','uses'=>'LoginController@PostLogin']);
     Route::post('user-logout',['as'=>'getlogout','uses'=>'LoginController@getlogout']);
+    Route::get('Register',['as'=>'Register','uses'=>'RegisterController@getRegister']);
+    Route::post('Register',['as'=>'Register','uses'=>'RegisterController@postRegister']);
     Route::get('profile',['as'=>'profile','uses'=>'userController@getprofile']);
-    Route::get('edit_user_profile/{id}',['as'=>'edit_user_profile','uses'=>'userController@geteditprofile_info']);
-    Route::post('edit_user_profile/{id}',['as'=>'edit_user_profile','uses'=>'userController@posteditprofile_info']);
-
+    Route::get('edit_user_profile',['as'=>'edit_user_profile','uses'=>'userController@geteditprofile_info']);
+    Route::post('edit_user_profile',['as'=>'edit_user_profile','uses'=>'userController@posteditprofile_info']);
+    Route::get('changepassword',['as'=>'changepassword','uses'=>'userController@getChangePassword']);
+    Route::post('changepassword','userController@postChangePassword');
 });
-
-
-
-
 
 Route::namespace('admin')->group(function (){
     Route::get('MarkAllSeen' ,'postAdmin_controller@AllSeen');
@@ -59,22 +58,22 @@ Route::namespace('admin')->group(function (){
             Route::get('{name}/delete/{id}','postAdmin_controller@Delete');
             Route::get('{name}/add',['as'=>'addpost','uses'=>'postAdmin_controller@GetAdd']);
             Route::post('{name}/add','postAdmin_controller@PostAdd');
+            Route::get('/detail/{id}',['as'=>'detailpost','uses'=>'postAdmin_controller@detail']);
 
         });
 /*route manager */
     });
-    Route::prefix('manager')->middleware('auth')->group(function (){
+ /*   Route::prefix('manager')->middleware('auth')->group(function (){
         Route::get('{token}',['uses'=>'DashboardController@index']);
-    });
+    });*/
+    Route::get('manager/{token}',['as'=>'manager','uses'=>'DashboardController@index']);
 
 });
-
 Route::get('demo',function (){
-    $post=DB::table('post')->join('topic','topic.id','=','post.topic_id')->join('users','users.id','=','post.user_id')->select('post.*','users.name')->where('topic.namedescript','=','html_css')->where('users.id','=',10)->get();
+    $post=post::find(591);
     return $post;
 });
 Route::get('webcome',function (){
         return view('welcome');
 });
 
-/*Route::get('login','admin/LoginController@getLogin');*/

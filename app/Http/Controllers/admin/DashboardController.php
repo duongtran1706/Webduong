@@ -8,6 +8,7 @@
 
 namespace App\Http\Controllers\admin;
 use App\Category;
+use App\post;
 use  App\Topic;
 use  App\User;
 use Illuminate\Http\Request;
@@ -21,8 +22,9 @@ class DashboardController extends Controller
     {
         $category = Category::all();
         $topic= Topic::all();
+        $post= post::all();
         $user= User::all();
-        return view()->share(['category'=>$category,'topic'=>$topic,'user'=>$user]);
+        return view()->share(['category'=>$category,'topic'=>$topic,'user'=>$user,'post'=>$post]);
     }
 
     public function index()

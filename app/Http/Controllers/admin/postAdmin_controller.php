@@ -20,7 +20,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification;
 use phpDocumentor\Reflection\Types\Null_;
-use StreamLab\StreamLabProvider\Facades\StreamLabFacades;
 
 class postAdmin_controller extends Controller
 {
@@ -31,11 +30,10 @@ class postAdmin_controller extends Controller
     }
     public  function GetList($name){
         $topic=Topic::find($name);
-        $temp1=DB::table('category')->join('topic','topic.category_id','=','category.id')->select('category.namedescript')->where('topic.namedescript','=',$name)->value('namedescript');
         if(Auth::user()->level==1)
         $post=DB::table('post')->join('topic','topic.id','=','post.topic_id')->join('users','users.id','=','post.user_id')->select('post.*','users.name')->where('topic.namedescript','=',$name)->get();
         else
-            $post=DB::table('post')->join('topic','topic.id','=','post.topic_id')->join('users','users.id','=','post.user_id')->select('post.*','users.name')->where('topic.namedescript','=',$name)->where('users.id','=',10)->get();
+            $post=DB::table('post')->join('topic','topic.id','=','post.topic_id')->join('users','users.id','=','post.user_id')->select('post.*','users.name')->where('topic.namedescript','=',$name)->where('users.id','=',Auth::user()->id)->get();
 
        /* return view('Admin.Modules.'.$temp1.'.'.$name.'.List',['topic'=>$topic,'post'=>$post,'name'=>$name]);*/
         return view('Admin.Modules.Post.List',['topic'=>$topic,'post'=>$post,'name'=>$name]);
@@ -73,10 +71,11 @@ class postAdmin_controller extends Controller
         }
         $post->Active = $request->Active;
         if($post->save()){
-            $user=User::find('');
+            $user=User::where('level','=',1)->orwhere('id','=',Auth::user()->id)->get();
+            /*$user=DB::table('users')->select('users.*')->where('level','=',1)->orwhere('id','=',Auth::user()->id)->get();*/
             $date=getdate();
             $string= $date['weekday']." ".$date['mday']."/".$date['mon']."/".$date['year']." ".$date['hours'].":".$date['minutes'].":".$date['seconds'];
-            $data='
+            $data='<a href="'.Route("detailpost",$post->id).'">
                             <div class="media">
                                 <div class="media-body">
                                     <h5 class="media-heading"><strong>'.Auth::user()->name.'</strong>
@@ -86,7 +85,7 @@ class postAdmin_controller extends Controller
                                     <p>'.$post->Title.'</p>
                                 </div>
                             </div>
-                        ';
+                       </a> ';
             Notification::send($user, new AddpostThread($post,$data));
         }
 
@@ -94,8 +93,7 @@ class postAdmin_controller extends Controller
     }
     public function getAdd($name) {
         $topic=Topic::find($name);
-        $temp1=DB::table('category')->join('topic','topic.category_id','=','category.id')->select('category.namedescript')->where('topic.namedescript','=',$name)->value('namedescript');
-        $post=DB::table('post')->join('topic','topic.id','=','post.topic_id')->join('users','users.id','=','post.user_id')->select('post.*','users.name')->where('topic.namedescript','=',$name)->get();
+       $post=DB::table('post')->join('topic','topic.id','=','post.topic_id')->join('users','users.id','=','post.user_id')->select('post.*','users.name')->where('topic.namedescript','=',$name)->get();
         return view('Admin.Modules.Post.Add',['topic'=>$topic,'post'=>$post,'name'=>$name]);
     }
     public function PostAdd(Request $request,$name) {
@@ -119,10 +117,11 @@ class postAdmin_controller extends Controller
         $post->views =0;
         $post->user_id = Auth::user()->id;
         if($post->save()){
-            $user=User::all();
+          /*  $user=DB::table('users')->where('level','=',1)->orwhere('id','=',Auth::user()->id);*/
+          $user=User::all();
             $date=getdate();
             $string= $date['weekday']." ".$date['mday']."/".$date['mon']."/".$date['year']." ".$date['hours'].":".$date['minutes'].":".$date['seconds'];
-            $data='
+            $data='<a href="'.Route("detailpost",$post->id).'">
                             <div class="media">
                                 <div class="media-body">
                                     <h5 class="media-heading"><strong>'.Auth::user()->name.'</strong>
@@ -132,7 +131,7 @@ class postAdmin_controller extends Controller
                                     <p>'.$post->Title.'</p>
                                 </div>
                             </div>
-                        ';
+                        </a>';
             Notification::send($user, new AddpostThread($post,$data));
         }
         return redirect('admin/post/'.$name.'/list')->with('sucsses','Đã thêm thành công');
@@ -152,4 +151,9 @@ class postAdmin_controller extends Controller
             $note->markAsRead();
         }
     }
+    public function detail($id){
+        $postdetail=post::find($id);
+        return view('Admin.Modules.Post.detail',['postdetail'=>$postdetail]);
+    }
+
 }

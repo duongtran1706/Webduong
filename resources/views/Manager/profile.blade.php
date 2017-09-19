@@ -13,7 +13,6 @@
 @section('content-admin')
 <div class="mainprofile container-fluid">
     <div class="row">
-        <div style="padding-top:50px;"> </div>
         <div class="col-lg-3 col-md-3 hidden-sm hidden-xs">
             <div class="panel panel-default">
                 <div class="panel-body">
@@ -24,7 +23,7 @@
                         <div class="media-body">
                             <hr>
                             <h3><strong>Tiểu Sử</strong></h3>
-                            {{Auth::user()->biography}}
+                            {!! Auth::user()->biography!!}
                             <hr>
                         </div>
                     </div>
@@ -35,12 +34,13 @@
             <div class="panel panel-default">
                 <div class="panel-body">
                     <span>
-                        <h1 class="panel-title pull-left" style="font-size:30px;">{{Auth::user()->DisplayName}} <small> Email: {{Auth::user()->email}}</small> <i class="fa fa-check text-success" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="John Doe is sharing with you"></i></h1>
+                        <h1 class="panel-title pull-left" style="font-size:30px;">
+                            {{Auth::user()->DisplayName}} <small> Email: {{Auth::user()->email}}</small> <i class="fa fa-check text-success" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="John Doe is sharing with you"></i></h1>
                         <div class="dropdown pull-right">
-                            <a class="btn btn-success dropdown-toggle"  href="{{route('edit_user_profile',Auth::user()->id)}}" aria-haspopup="true" aria-expanded="true">
-                                Edit profile
-                                <span class="caret"></span>
+                            <a class="btn btn-success dropdown-toggle"  href="{{route('edit_user_profile')}}" aria-haspopup="true" aria-expanded="true">
+                                Sửa Thông Tin
                             </a>
+
                         </div>
                     </span>
                     <br><br>
@@ -49,9 +49,11 @@
 
                     <br><br><hr>
                     <span class="pull-left">
-                        <a href="#" class="btn btn-link" style="text-decoration:none;"><i class="fa fa-fw fa-files-o" aria-hidden="true"></i> Đăng Bài</a>
-                        <a href="#" class="btn btn-link" style="text-decoration:none;"><i class="fa fa-fw fa-picture-o" aria-hidden="true"></i> Photos <span class="badge">42</span></a>
-                        <a href="#" class="btn btn-link" style="text-decoration:none;"><i class="fa fa-fw fa-users" aria-hidden="true"></i> Contacts <span class="badge">42</span></a>
+                    <?php
+                     $tring='user?token='.Auth::user()->remember_token
+                        ?>
+                          <a href="{{route('manager',$tring)}}" class="btn btn-link" style="text-decoration:none;"><i class="fa fa-home" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="Mention"> Quản Lý</i></a>
+
                     </span>
                     <span class="pull-right">
                         <a href="#" class="btn btn-link" style="text-decoration:none;"><i class="fa fa-lg fa-at" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="Mention"></i></a>

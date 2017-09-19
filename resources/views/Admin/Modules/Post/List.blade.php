@@ -63,10 +63,10 @@
                                 <td><div style="overflow: auto">{{$pt->Title}}</div></td>
                                 <td><div style="overflow: auto">{{$pt->UseDescription}}</div></td>
                                 <td>
-                                    <div style="overflow: auto">{{$pt->Description}}
+                                    <div style="overflow: auto">{!!$pt->Description!!}
                                     </div></td>
                                 <td><div style="overflow: auto">
-                                    {{$pt->ContentPost}}
+                                    {!!  $pt->ContentPost!!}
                                     </div></td>
                                 <td>{{$pt->Picture}}</td>
                                 <td>{{$pt->Seen}}</td>

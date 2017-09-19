@@ -62,7 +62,7 @@
                                             </form>
                                         </div>
                                         <div class="bottom text-center">
-                                            <a href="#">Đăng Ký </a>
+                                            <a href="{{Route('Register')}}">Đăng Ký </a>
                                         </div>
                                     </div>
                                 </li>
@@ -77,7 +77,7 @@
                                 <ul class="dropdown-content" role="menu">
                                     <li>
                                         <?php $user='user?token='.Auth::user()->remember_token?>
-                                        <a href="{{url('/manager',$user)}}"><i class="fa fa-fw fa-gear"></i> Manager</a>
+                                        <a href="{{route('manager',$user)}}"><i class="fa fa-fw fa-gear"></i> Manager</a>
                                     </li>
                                     <li>
                                         <a href="{{url('/')}}"

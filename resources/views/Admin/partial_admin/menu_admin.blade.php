@@ -83,10 +83,9 @@
                 <ul class="dropdown-menu message-dropdown" id="showNotification">
                     @foreach(auth()->user()->notifications as $note)
                         <li class="message-preview">
-                            <a href="#" class="{{ $note->read_at == null ? 'unread' : '' }}">
                                 {!! $note->data['data'] !!}
                                 <?php $note->markAsRead();?>
-                            </a>
+
                         </li>
                     @endforeach
                     <li class="message-footer">
@@ -98,16 +97,17 @@
             <!--end info-->
             <!--login-->
             <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> {{Auth::user()->DisplayName}} <b class="caret"></b></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img  class="images" src="{{Auth::user()->Avatar}}" alt="Mountain View" >{{Auth::user()->DisplayName}} <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li>
-                        <a href="{{Route('profile')}}"><i class="fa fa-fw fa-user"></i> Profile</a>
+                        <a href="{{Route('profile')}}"><i class="fa fa-fw fa-user"></i> Thông Tin</a>
                     </li>
                     <li>
                         <a href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-fw fa-gear"></i> Manager</a>
+                        <a href="{{route('changepassword')}}"><i class="fa fa-unlock" aria-hidden="true"></i>
+                            Thay đổi mật khẩu</a>
                     </li>
                     <li class="divider"></li>
                     <li>
