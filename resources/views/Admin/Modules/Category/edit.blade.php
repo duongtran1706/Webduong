@@ -55,7 +55,7 @@
                             </div>
                             <div class="form-group">
                                 <label>miêu tả</label>
-                                <input class="form-control" name="Discription" value="{{$cate->Discription}}" placeholder="Nhập Tiêu đề">
+                                <input class="form-control" name="Description" value="{{$cate->Description}}" placeholder="Nhập Tiêu đề">
                             </div>
                             <div class="form-group">
                                 <label class="radio-inline">

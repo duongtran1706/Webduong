@@ -58,7 +58,8 @@ Route::namespace('admin')->group(function (){
             Route::get('{name}/delete/{id}','postAdmin_controller@Delete');
             Route::get('{name}/add',['as'=>'addpost','uses'=>'postAdmin_controller@GetAdd']);
             Route::post('{name}/add','postAdmin_controller@PostAdd');
-            Route::get('/detail/{id}',['as'=>'detailpost','uses'=>'postAdmin_controller@detail']);
+            Route::get('{name}/detail/{id}',['as'=>'detailpost','uses'=>'postAdmin_controller@detail']);
+            Route::get('/detail/{id}',['as'=>'postdetail','uses'=>'postAdmin_controller@detailnotification']);
 
         });
 /*route manager */

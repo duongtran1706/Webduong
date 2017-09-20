@@ -19,21 +19,23 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'name' => $faker->name,
         'DisplayName'=>$faker->name,
         'email' => $faker->unique()->safeEmail,
-        'Lastlogin'=>$faker->dateTimeThisMonth()->format('Y-m-d H:i:s'),
-        'Birthday'=>$faker->dateTimeThisMonth()->format('Y-m-d H:i:s'),
+        'Lastlogin'=>$faker->date('Y-m-d'),
+        'Birthday'=>$faker->date('Y-m-d'),
         'Avatar'=>$faker->imageUrl($width = 640, $height = 480),
         'password' => $password ?: $password = bcrypt('secret'),
-        'remember_token' => str_random(10),
+        'remember_token' => str_random(),
 
     ];
 });
-/*
-$factory->define(App\Category::class, function (Faker\Generator $faker) {
+/*$factory->define(App\Category::class, function (Faker\Generator $faker) {
     return [
-    'name'=>$faker->name,
-    'Discription'=>$faker->text,
+        'name'=>$faker->name,
+        'Discription'=>$faker->text,
+
     ];
-});
+});*/
+/*
+
 $factory->define(App\Topic::class, function (Faker\Generator $faker) {
     return [
     'name'=>$faker->name,
@@ -46,7 +48,7 @@ $factory->define(App\Topic::class, function (Faker\Generator $faker) {
 */
 $factory->define(App\post::class, function (Faker\Generator $faker) {
     return [
-    'Title'=>$faker->text(200),
+    'Title'=>$faker->text(100),
     'slug'=>str_slug('Title','-'),
     'Description'=>$faker->text(500),
     'UseDescription'=>$faker->text(500),
@@ -54,8 +56,9 @@ $factory->define(App\post::class, function (Faker\Generator $faker) {
     'Picture'=>$faker->imageUrl(640,480),
     'Seen'=>1,
     'Active'=>1,
-    'topic_id'=>random_int(15, 18),
-    'user_id'=>10,
+        'views'=>1,
+    'topic_id'=>random_int(1, 14),
+    'user_id'=>random_int(1, 2),
 
     ];
 });

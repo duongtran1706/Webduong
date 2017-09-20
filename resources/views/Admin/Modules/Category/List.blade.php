@@ -54,7 +54,7 @@
                             <tr class="odd gradeX" align="center">
                                 <td>{{$cate->id}}</td>
                                 <td><div style="overflow: auto">{{$cate->name}}</div></td>
-                                <td><div style=" overflow: auto">{{$cate->Discription}}</div></td>
+                                <td><div style=" overflow: auto">{{$cate->Description}}</div></td>
                                 <td>@if($cate->Display==0)
                                         Không hiển thị
                                     @else

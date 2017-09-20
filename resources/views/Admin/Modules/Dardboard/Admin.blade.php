@@ -103,6 +103,34 @@
                         </div>
                     </div>
                 </div>
+                <!--row views-->
+                <div class="row">
+                    <div class="col-lg-5">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Bài Viết Xem Nhiều Nhất</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="list-group">
+                                    @foreach( $views as $vs)
+                                        <a href="{{Route('postdetail',$vs->id)}}" class="list-group-item">
+                                            <span class="badge">Lượt Xem:{{$vs->views}}</span>
+                                            <i class="fa fa-newspaper-o" aria-hidden="true"></i>
+                                            <article>
+                                            {{$vs->Title }}
+                                            </article>
+                                        </a>
+                                    @endforeach
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-5">
+
+                    </div>
+                </div>
 
             </div>
         </div>

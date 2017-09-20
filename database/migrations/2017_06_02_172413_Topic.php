@@ -16,7 +16,9 @@ class Topic extends Migration
         Schema::create('Topic',function (Blueprint $table){
             $table->increments('id')->index();
             $table->string('name');
-            $table->text('Discription');
+            $table->string('namedescript');
+            $table->text('Description')->nullable();
+            $table->tinyInteger('Display');
             $table->integer('category_id')->unsigned();
             $table->foreign('category_id')->references('id')->on('Category');
             $table->rememberToken();

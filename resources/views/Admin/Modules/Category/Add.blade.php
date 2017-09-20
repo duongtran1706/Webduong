@@ -48,7 +48,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Miêu tả  </label>
-                                <input class="form-control" name="Discription" placeholder="Nhập miêu tả" />
+                                <input class="form-control" name="Description" placeholder="Nhập miêu tả" />
                             </div>
                             <div class="form-group">
                                 <label class="radio-inline">

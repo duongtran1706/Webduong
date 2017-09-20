@@ -11,7 +11,6 @@
 {{--Add bootstrap--}}
 <script src="{{asset('js/bootstrap.min.js')}}"></script>
 {{--custom layout js--}}
-<script src="{{asset('ad-style/js/sb-admin.js')}}"></script>
 <script src="{{asset('ad-style/js/bootstrap-datetimepicker.min.js')}}"></script>
 <script src="{{asset('ad-style/js/menu.js')}}"></script>
 <script src="{{asset('ad-style/js/metisMenu.min.js')}}"></script>
@@ -22,7 +21,8 @@
 <script src="{{asset('ad-style/js/plugins/morris/morris.min.js')}}"></script>
 <script src="{{asset('ad-style/js/plugins/morris/morris-data.min.js')}}"></script>
 <script src="{{asset('ad-style/js/app.js')}}"></script>
-<script src="{{asset('StreamLab/StreamLab.js')}}"></script>
+<script src="{{asset('ad-style/js/plugins/readmore.js')}}"></script>
+<script src="{{asset('ad-style/js/sb-admin.js')}}"></script>
 <!-- Page-Level Demo Scripts - Tables - Use for reference -->
 <script>
     $(document).ready(function() {

@@ -42,8 +42,6 @@ class postAdmin_controller extends Controller
     }
     public function GetEdit($name,$id){
         $post=post::find($id);
-        $temp1=DB::table('category')->join('topic','topic.category_id','=','category.id')
-            ->join('post','post.topic_id','=','topic.id')->select('category.namedescript')->where('post.id','=',$id)->value('namedescript');
      return view('Admin.Modules.Post.Edit',['post'=>$post,'name'=>$name]);
 
     }
@@ -75,7 +73,7 @@ class postAdmin_controller extends Controller
             /*$user=DB::table('users')->select('users.*')->where('level','=',1)->orwhere('id','=',Auth::user()->id)->get();*/
             $date=getdate();
             $string= $date['weekday']." ".$date['mday']."/".$date['mon']."/".$date['year']." ".$date['hours'].":".$date['minutes'].":".$date['seconds'];
-            $data='<a href="'.Route("detailpost",$post->id).'">
+            $data='<a href="'.Route("postdetail",$post->id).'">
                             <div class="media">
                                 <div class="media-body">
                                     <h5 class="media-heading"><strong>'.Auth::user()->name.'</strong>
@@ -114,14 +112,14 @@ class postAdmin_controller extends Controller
         $post->Active=$request->Active;
         $post->Picture = $request->Picture;
         $post->topic_id = $topic;
-        $post->views =0;
+        $post->views =0;/*$post->Seen =0;*/
         $post->user_id = Auth::user()->id;
         if($post->save()){
           /*  $user=DB::table('users')->where('level','=',1)->orwhere('id','=',Auth::user()->id);*/
           $user=User::all();
             $date=getdate();
             $string= $date['weekday']." ".$date['mday']."/".$date['mon']."/".$date['year']." ".$date['hours'].":".$date['minutes'].":".$date['seconds'];
-            $data='<a href="'.Route("detailpost",$post->id).'">
+            $data='<a href="'.Route("postdetail",$post->id).'">
                             <div class="media">
                                 <div class="media-body">
                                     <h5 class="media-heading"><strong>'.Auth::user()->name.'</strong>
@@ -151,9 +149,12 @@ class postAdmin_controller extends Controller
             $note->markAsRead();
         }
     }
-    public function detail($id){
+    public function detail($name,$id){
+        $postdetail=post::find($id);
+        return view('Admin.Modules.Post.detail',['postdetail'=>$postdetail,'name'=>$name]);
+    }
+    public function detailnotification($id){
         $postdetail=post::find($id);
         return view('Admin.Modules.Post.detail',['postdetail'=>$postdetail]);
     }
-
 }

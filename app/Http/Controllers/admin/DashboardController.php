@@ -15,7 +15,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-
+use DB;
 class DashboardController extends Controller
 {
     public function __construct()
@@ -29,10 +29,12 @@ class DashboardController extends Controller
 
     public function index()
     {
+        $views= DB::table('post')->orderBy('views','DESC')->take(5)->get();
+        /*take 5 Most views in post*/
         if(Auth::user()->level==1) {
-            return view("Admin.Modules.Dardboard.Admin");
+            return view("Admin.Modules.Dardboard.Admin",['views'=>$views]);
         }else{
-            return view('Admin.Modules.Dardboard.manager');
+            return view('Admin.Modules.Dardboard.manager',['views'=>$views]);
         }
     }
 

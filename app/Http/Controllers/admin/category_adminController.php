@@ -28,7 +28,7 @@ class category_adminController extends Controller{
         $category= new Category;
         $category->name=$request->name;
         $category->namedescript= str_slug($request->name,'_');
-        $category->Discription=$request->Discription;
+        $category->Description=$request->Description;
         $category->Display=$request->Display;
         $category->save();
         return redirect('admin/category/list')->with('sucsses','Đã thêm thành công');

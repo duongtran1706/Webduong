@@ -25,7 +25,7 @@ class Topic_AdminController extends Controller
                 'topicname.unique'=>'Chủ Đề Đã tồn tại',]);
         $topic= new Topic;
         $topic->name=$request->topicname;
-        $topic->Discription=$request->description;
+        $topic->Description=$request->description;
         $topic->namedescript=str_slug($request->name,'_');
         $topic->category_id=$request->category;
         $topic->Display = $request->Display;

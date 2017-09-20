@@ -16,12 +16,14 @@ class Post extends Migration
         Schema::create('post',function (Blueprint $table){
             $table->increments('id')->index();
             $table->string('Title');
-            $table->text('Description');
-            $table->text('UseDescription');
+            $table->string('slug');
+            $table->text('Description')->nullable();
+            $table->text('UseDescription')->nullable();
             $table->text('ContentPost');
             $table->text('Picture');
-            $table->Integer('Seen');
-            $table->Integer('Active');
+            $table->Integer('Seen')->nullable()->default(0);
+            $table->Integer('views')->nullable()->default(0);
+            $table->tinyInteger('Active');
             $table->integer('topic_id')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->foreign('topic_id')->references('id')->on('Topic');
