@@ -30,15 +30,20 @@
                                 <a class="page-scroll" href="#page-top"></a>
                             </li>
                             @foreach($category as $categories)
+                                @if($categories->Display==1)
                                 <li class="dropdown"><a class="page-scroll" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" href="#">{{$categories->name}}</a>
                                     <ul class="dropdown-menu">
-                                        @foreach($categories->Topic as $Tp)
+                                        <?php $topic=DB::table('topic')->select('topic.*')->where('parent_id','=',$categories->id)->get();?>
+                                        @foreach($topic as $Tp)
+                                           @if($Tp->Display==1)
                                             <li>
-                                                <a href="#">{{$Tp->name}}</a>
+                                                <a href="{{Route('getpostlist',['name'=>$Tp->namedescript])}}">{{$Tp->name}}</a>
                                             </li>
+                                            @endif
                                         @endforeach
                                     </ul>
                                 </li>
+                                @endif
                             @endforeach
 
                         </ul>

@@ -13,7 +13,7 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+ /*       Schema::create('users', function (Blueprint $table) {
             $table->increments('id')->index();
             $table->string('name');
             $table->string('DisplayName');
@@ -26,7 +26,22 @@ class CreateUsersTable extends Migration
             $table->text('biography');
             $table->tinyInteger('level');
             $table->rememberToken();
-            $table->timestamps();
+            $table->timestamps();*/
+            Schema::create('users', function (Blueprint $table) {
+                $table->increments('id')->index();
+                $table->string('name');
+                $table->string('DisplayName');
+                $table->string('username');
+                $table->string('password');
+                $table->string('Avatar');
+                $table->Date('Lastlogin')->nullable();
+                $table->Date('Birthday')->nullable();
+                $table->string('email');
+                $table->text('biography');
+                $table->tinyInteger('level');
+                $table->rememberToken();
+                $table->timestamps();
+
         });
     }
 

@@ -19,8 +19,9 @@ class Topic extends Migration
             $table->string('namedescript');
             $table->text('Description')->nullable();
             $table->tinyInteger('Display');
-            $table->integer('category_id')->unsigned();
-            $table->foreign('category_id')->references('id')->on('Category');
+            $table->integer('parent_id')->unsigned()->nullable();
+            $table->text('tag')->nullable();
+            $table->foreign('parent_id')->references('id')->on('Topic');
             $table->rememberToken();
             $table->timestamps();
         });

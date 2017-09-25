@@ -50,8 +50,20 @@
                                 <input class="form-control" name="topicname" value="{{$topic->name}}" placeholder="Nhập tên chủ đề">
                             </div>
                             <div class="form-group">
-                                <label>id danh mục</label>
-                                <input class="form-control" name="category_id" value="{{$topic->category_id}}" placeholder="Nhập tên chủ đề">
+                                <label> danh mục</label>
+                                <select class="form-control" name="category_id" id="category">
+                                    {{--array cates--}}
+                                    <?php $cates=DB::table('topic')->where('topic.id','=',$topic->parent_id)->get(); ?>
+                                        @foreach($cates as $tc)
+
+                                      <option value="{{$tc->id}}"><?php echo $tc->name; ?></option>
+                                        @endforeach
+                                    @foreach($category as $ct)
+                                            @if($ct->id!=$topic->parent_id)
+                                        <option value="{{ $ct->id }}">{{ $ct->name }}</option>
+                                            @endif
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label class="radio-inline">

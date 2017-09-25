@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\admin;
 use Illuminate\Http\Request;
-use App\Category;
 use  App\Topic;
 use Auth;
 use App\Http\Controllers\Controller;
@@ -15,9 +14,8 @@ class Admin_Controller extends Controller
      */
     public  function __construct()
     {
-        $category = Category::all();
         $topic = Topic::all();
-        return view()->share('category',$category,'topic',$topic);
+        return view()->share(['topic'=>$topic]);
     }
 
  /*   public function index()

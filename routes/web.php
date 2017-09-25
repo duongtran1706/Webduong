@@ -1,6 +1,5 @@
 <?php
-use App\post;
-Route::namespace('user')->group(function (){
+Route::namespace('user')->middleware('auth')->group(function (){
     Route::get('/',['as'=>'home','uses'=>'layoutController@home']);
     Route::get('user-login',['as'=>'getlogin','uses'=>'LoginController@GetLogin']);
     Route::post('user-login',['as'=>'getlogin','uses'=>'LoginController@PostLogin']);
@@ -12,6 +11,12 @@ Route::namespace('user')->group(function (){
     Route::post('edit_user_profile',['as'=>'edit_user_profile','uses'=>'userController@posteditprofile_info']);
     Route::get('changepassword',['as'=>'changepassword','uses'=>'userController@getChangePassword']);
     Route::post('changepassword','userController@postChangePassword');
+    /*get post*/
+    Route::prefix('post')->group(function (){
+    Route::get('/{name}',['as'=>'getpostlist','uses'=>'Topic_Controller@GetTopicchild']);
+
+    });
+
 });
 
 Route::namespace('admin')->group(function (){
@@ -41,6 +46,21 @@ Route::namespace('admin')->group(function (){
             Route::get('delete/{id}','Topic_AdminController@Delete');
 
         });
+        /*route topic child*/
+ /*       Route::prefix('topicchild')->middleware('superadmin')->group(function (){
+            Route::get('{id}-{name}/list',['as'=>'topicchildlist','uses'=>'Topic_AdminController@GetListChild']);
+
+        });*/
+
+        Route::prefix('topicchild')->middleware('superadmin')->group(function (){
+            Route::get('{name}/list',['as'=>'topicchildlist','uses'=>'Topic_AdminController@GetListChild']);
+            Route::get('{id}-{name}/add',['as'=>'addtopicchild','uses'=>'Topic_AdminController@GetAddChild']);
+            Route::post('{id}-{name}/add','Topic_AdminController@PostAddChild');
+            Route::get('{name}/edit/{id}','Topic_AdminController@GetEditChild');
+            Route::post('{name}/edit/{id}','Topic_AdminController@PostEditChild');
+            Route::get('delete/{id}','Topic_AdminController@DeleteChild');
+
+        });
         /*user */
         Route::prefix('user')->middleware('superadmin')->group(function (){
             Route::get('list',['as'=>'userlist','uses'=>'userController@GetList']);
@@ -51,13 +71,14 @@ Route::namespace('admin')->group(function (){
             Route::get('delete/{id}','userController@Delete');
         });
 
+
         Route::prefix('post')->middleware('superadmin')->group(function (){
             Route::get('{name}/list',['as'=>'postlist','uses'=>'postAdmin_controller@GetList']);
             Route::get('{name}/edit/{id}','postAdmin_controller@GetEdit');
             Route::post('{name}/edit/{id}','postAdmin_controller@PostEdit');
             Route::get('{name}/delete/{id}','postAdmin_controller@Delete');
-            Route::get('{name}/add',['as'=>'addpost','uses'=>'postAdmin_controller@GetAdd']);
-            Route::post('{name}/add','postAdmin_controller@PostAdd');
+            Route::get('{id}-{name}/add',['as'=>'addpost','uses'=>'postAdmin_controller@GetAdd']);
+            Route::post('{id}{name}/add','postAdmin_controller@PostAdd');
             Route::get('{name}/detail/{id}',['as'=>'detailpost','uses'=>'postAdmin_controller@detail']);
             Route::get('/detail/{id}',['as'=>'postdetail','uses'=>'postAdmin_controller@detailnotification']);
 
@@ -70,11 +91,14 @@ Route::namespace('admin')->group(function (){
     Route::get('manager/{token}',['as'=>'manager','uses'=>'DashboardController@index']);
 
 });
-Route::get('demo',function (){
-    $post=post::find(591);
-    return $post;
-});
+
 Route::get('webcome',function (){
         return view('welcome');
 });
-
+use App\Topic;
+Route::get('demo',function (){
+    $topic=Topic::find(7);
+    $cateparent=Topic::where('id','=',$topic->parent_id)->get();
+    $temp= $cateparent.name;
+    return $temp;
+});

@@ -7,7 +7,6 @@
  */
 namespace App\Http\Controllers\admin;
 use Illuminate\Http\Request;
-use App\Category;
 use  App\Topic;
 use App\post;
 use Auth;
@@ -15,7 +14,7 @@ use App\Http\Controllers\Controller;
 class FontEndController  extends Controller
 {
     public function GetList($id){
-        $category=Category::all();
+        $category = Topic::where('parent_id','=',null)->get();
      $topic=Topic::find($id);
         /*     $post=Post::all()->find('');
           /*htmlcss id= 3

@@ -20,7 +20,7 @@ class Post extends Migration
             $table->text('Description')->nullable();
             $table->text('UseDescription')->nullable();
             $table->text('ContentPost');
-            $table->text('Picture');
+            $table->text('Picture')->nullable();
             $table->Integer('Seen')->nullable()->default(0);
             $table->Integer('views')->nullable()->default(0);
             $table->tinyInteger('Active');

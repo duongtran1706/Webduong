@@ -7,7 +7,6 @@
  */
 
 namespace App\Http\Controllers\admin;
-use App\Category;
 use App\post;
 use  App\Topic;
 use  App\User;
@@ -20,7 +19,7 @@ class DashboardController extends Controller
 {
     public function __construct()
     {
-        $category = Category::all();
+        $category = Topic::where('parent_id','=',null)->get();
         $topic= Topic::all();
         $post= post::all();
         $user= User::all();

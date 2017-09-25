@@ -14,12 +14,10 @@ class Like extends Migration
     public function up()
     {
         Schema::create('Like', function (Blueprint $table) {
-            $table->integer('post_id')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->integer('isLike');
-            $table->primary(array('post_id', 'user_id'));
+            $table->primary( 'user_id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('post_id')->references('id')->on('post');
             $table->rememberToken();
             $table->timestamps();
         });

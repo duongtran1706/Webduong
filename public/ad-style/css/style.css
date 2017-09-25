@@ -344,6 +344,8 @@ ul.alert-dropdown {
         position: absolute;
         width: 250px;
         margin-top: 51px;
+        height: 600px;
+        overflow-y: auto;
     }
 
 

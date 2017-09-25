@@ -38,7 +38,7 @@
                         <thead>
                         <tr align="center">
                             <th>ID</th>
-                            <th>Tên danh mục</th>
+                            <th>Tên chủ đề</th>
                             <th>Hiển thị menu</th>
                             <th>Danh Mục</th>
                             <th></th>
@@ -46,28 +46,31 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($topic as $tp)
-                            <tr class="odd gradeX" align="center">
-                                <td>{{$tp->id}}</td>
-                                <td>{{$tp->name}}</td>
-                                <td>@if($tp->Display==0)
-                                        Không hiển thị
-                                    @else
-                                        Hiển thị
-                                    @endif</td>
-                                <td>
-                                    <?php
-                                   $category=DB::table('category')->where('id',$tp->category_id)->value('name');
-                                    echo $category;
-                                   ?>
-                                </td>
-                                <td class="center">
-                                    <a href="delete/{{$tp->id}}" onclick="return confirmAction()"><i class="fa fa-ban" aria-hidden="true"></i>
-                                    </a>
-                                </td>
-                                <td class="center"><a href="edit/{{ $tp->id }}"><i class="fa fa-pencil" aria-hidden="true"></i>
-                                    </a></td>
-                            </tr>
+
+                        @foreach($category as $cate)
+                            <?php $topic=DB::table('topic')->select('topic.*')->where('parent_id','=',$cate->id)->get();?>
+                                @foreach($topic as $tp)
+                                <tr class="odd gradeX" align="center">
+                                    <td>{{$tp->id}}</td>
+                                    <td>{{$tp->name}}</td>
+                                    <td>@if($tp->Display==0)
+                                            Không hiển thị
+                                        @else
+                                            Hiển thị
+                                        @endif</td>
+                                    <td>
+                                        <?php
+                                        echo $cate->name;
+                                       ?>
+                                    </td>
+                                    <td class="center">
+                                        <a href="delete/{{$tp->id}}" onclick="return confirmAction()"><i class="fa fa-ban" aria-hidden="true"></i>
+                                        </a>
+                                    </td>
+                                    <td class="center"><a href="edit/{{ $tp->id }}"><i class="fa fa-pencil" aria-hidden="true"></i>
+                                        </a></td>
+                                </tr>
+                                @endforeach
                         @endforeach
                         </tbody>
 

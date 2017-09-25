@@ -34,22 +34,22 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 
     ];
 });*/
-/*
+
 
 $factory->define(App\Topic::class, function (Faker\Generator $faker) {
     return [
-    'name'=>$faker->name,
-    'Discription'=>$faker->text(500),
-    'category_id'=>function(){
-        return factory(App\Category::class)->create()->id;
-    },
+    'name'=>$temp=$faker->name,
+    'Description'=>$faker->text(400),
+    'namedescript'=>str_slug($temp,'-'),
+   'Display'=>1,
+    'parent_id'=>random_int(7,20),
     ];
 });
-*/
+
 $factory->define(App\post::class, function (Faker\Generator $faker) {
     return [
-    'Title'=>$faker->text(100),
-    'slug'=>str_slug('Title','-'),
+    'Title'=>$temp=$faker->text(50),
+    'slug'=>str_slug($temp,'-'),
     'Description'=>$faker->text(500),
     'UseDescription'=>$faker->text(500),
     'ContentPost'=>$faker->text(10000),
@@ -57,7 +57,7 @@ $factory->define(App\post::class, function (Faker\Generator $faker) {
     'Seen'=>1,
     'Active'=>1,
         'views'=>1,
-    'topic_id'=>random_int(1, 14),
+    'topic_id'=>random_int(21, 79),
     'user_id'=>random_int(1, 2),
 
     ];

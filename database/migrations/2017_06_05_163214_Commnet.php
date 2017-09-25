@@ -16,13 +16,12 @@ class Commnet extends Migration
         Schema::create('Comment', function (Blueprint $table) {
             $table->increments('id')->index();
             $table->integer('user_id')->unsigned();
-            $table->string('Title');
-            $table->text('Description');
-            $table->text('UseDescription');
+            $table->integer('post_id')->unsigned();
             $table->text('ContentComment');
-            $table->Integer('parent');
+            $table->Integer('parent')->unsigned()->nullable();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('id')->references('id')->on('post');
+            $table->foreign('post_id')->references('id')->on('post');
+            $table->foreign('parent')->references('id')->on('Comment');
             $table->rememberToken();
             $table->timestamps();
         });

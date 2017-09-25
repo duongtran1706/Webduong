@@ -6,7 +6,6 @@ use App\Topic;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\post;
-use App\Category;
 use DB;
 
 
@@ -18,7 +17,8 @@ class Post_Controller extends Controller
         $topic=Topic::all();
         return view()->share(['category'=>$category,'topic'=>$topic]);
     }
-    public  function GetListpost(){
-
+    public  function GetListpost($name){
+        $tp=DB::table('topic')->select('topic.*')->where('topic.namedescript','=',$name)->orderBy('DESC')->get();
+        return view('User.Post.post',['tp'=>$tp]);
     }
 }

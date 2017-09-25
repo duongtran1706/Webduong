@@ -13,7 +13,6 @@ use Faker\Provider\DateTime;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Topic;
-use App\Category;
 use App\post;
 use DB;
 use App\Http\Controllers\Controller;
@@ -25,11 +24,12 @@ class postAdmin_controller extends Controller
 {
     public  function __construct()
     {
-        $category = Category::all();
+        $category = Topic::where('parent_id','=',null)->get();
         return view()->share('category',$category);
     }
     public  function GetList($name){
         $topic=Topic::find($name);
+        /*$topics=DB::table('topic')->select('topic.*')->where('topic.parent_id','=',$id)->get();*/
         if(Auth::user()->level==1)
         $post=DB::table('post')->join('topic','topic.id','=','post.topic_id')->join('users','users.id','=','post.user_id')->select('post.*','users.name')->where('topic.namedescript','=',$name)->get();
         else
@@ -89,10 +89,11 @@ class postAdmin_controller extends Controller
 
         return redirect('admin/post/'.$name.'/list')->with('sucsses','Đã sửa thành công');
     }
-    public function getAdd($name) {
+    public function getAdd($id,$name) {
+        $topicparent=DB::table('topic')->select('topic.*')->where('topic.parent_id',$id)->get();
         $topic=Topic::find($name);
        $post=DB::table('post')->join('topic','topic.id','=','post.topic_id')->join('users','users.id','=','post.user_id')->select('post.*','users.name')->where('topic.namedescript','=',$name)->get();
-        return view('Admin.Modules.Post.Add',['topic'=>$topic,'post'=>$post,'name'=>$name]);
+        return view('Admin.Modules.Post.Add',['topic'=>$topic,'post'=>$post,'name'=>$name,'topicparent'=>$topicparent]);
     }
     public function PostAdd(Request $request,$name) {
         $this->validate($request,[
@@ -111,7 +112,7 @@ class postAdmin_controller extends Controller
         $post->ContentPost = $request->ContentPost;
         $post->Active=$request->Active;
         $post->Picture = $request->Picture;
-        $post->topic_id = $topic;
+        $post->topic_id = $request->parent_id;
         $post->views =0;/*$post->Seen =0;*/
         $post->user_id = Auth::user()->id;
         if($post->save()){

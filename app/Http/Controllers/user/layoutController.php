@@ -6,8 +6,8 @@
  * Time: 10:53 PM
  */
 namespace App\Http\Controllers\user;
+use App\Topic;
 use Illuminate\Http\Request;
-use App\Category;
 use App\post;
 /*use App\Http\Request;*/
 use App\Http\Controllers\Controller;
@@ -22,7 +22,7 @@ class layoutController extends Controller{
         }else { return "Không tìm thấy file";}
     }
     public function home(){
-        $category=Category::all();
+        $category=Topic::where('parent_id','=',null)->get();
         $post=post::all()->take(5);
         return view('Layout.Layout',['category'=>$category,'post'=>$post]);
     }

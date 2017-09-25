@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\user;
 
-use App\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
+use App\Topic;
 use Auth;
 use Hash;
 use PhpParser\Node\Stmt\Return_;
@@ -14,7 +14,7 @@ class userController extends Controller
 {
     public function __construct()
     {
-        $category=Category::all();
+        $category = Topic::where('parent_id','=',null)->get();
         return view()->share('category',$category);
     }
 

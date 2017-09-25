@@ -43,6 +43,7 @@
                         <tr align="center">
                             <th>ID</th>
                             <th>Tiêu Đề</th>
+                            <th>Chủ Đề Lớn</th>
                             <th>Đường Dẫn</th>
                             <th>Hình ảnh</th>
                             <th>Lượt Xem</th>
@@ -59,6 +60,11 @@
                             <tr class="odd gradeX" align="center">
                                 <td>{{$pt->id}}</td>
                                 <td><div style="overflow: auto">{{$pt->Title}}</div></td>
+                                <td>
+                                <?php $topicparent=DB::table('topic')->select('topic.name')->where('topic.id','=',$pt->topic_id)->value('name');
+                                echo $topicparent;
+                                ?>
+                                </td>
                                 <td>{{$pt->slug}}</td>
                                 <td>{{$pt->Picture}}</td>
                                 <td>{{$pt->Seen}}</td>

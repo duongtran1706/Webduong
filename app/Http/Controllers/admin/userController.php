@@ -7,7 +7,6 @@
  */namespace App\Http\Controllers\admin;
 use App\User;
 use Illuminate\Http\Request;
-use App\Category;
 use  App\Topic;
 use Auth;
 use App\Http\Controllers\Controller;
@@ -16,7 +15,7 @@ class userController extends Controller{
     public function __construct()
     {
         $user= User::all();
-        $category=Category::all();
+        $category = Topic::where('parent_id','=',null)->get();
         return view()->share(['user'=>$user,'category'=>$category]);
     }
 

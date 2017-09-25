@@ -71,7 +71,9 @@
                             @else
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                   @if(Auth::check()) {{ Auth::user()->name }}@endif
+                                   @if(Auth::check())
+                                       <img  class="imageavatar" src="{{Auth::user()->Avatar}}" alt="{{ Auth::user()->name }}">
+                                        {{ Auth::user()->name }}@endif
                                 </a>
 
                                 <ul class="dropdown-content" role="menu">

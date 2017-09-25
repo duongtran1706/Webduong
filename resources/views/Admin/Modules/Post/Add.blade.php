@@ -6,16 +6,6 @@
  * Time: 2:55 PM
  */
 ?>
-
-<?php
-/**
- * Created by PhpStorm.
- * User: DuongTran
- * Date: 8/30/2017
- * Time: 9:25 PM
- */
-?>
-
 @extends('Admin.Layout_Admin.Layout_Admin')
 @section('title-admin')
     Thêm Bài Viết Cho {{$name }}
@@ -45,6 +35,14 @@
                             <div class="form-group">
                                 <label>Tiêu Đề: </label>
                                 <input class="form-control" name="Title" placeholder="Nhập tên tiêu đề" />
+                            </div>
+                            <div class="form-group">
+                                <label>Chủ Đề: </label>
+                                <select class="form-control" name="parent_id" id="Chudelon">
+                                    @foreach($topicparent as $tp)
+                                        <option value="{{ $tp->id }}">{{ $tp->name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label>Miêu tả người dùng: </label>

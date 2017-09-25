@@ -24,20 +24,23 @@
                 <a href="#"><i class="fa fa-cube fa-fw"></i> {{$cate->name}}<span class="fa arrow"></span></a>
 
                 <ul class="nav nav-second-level">
-                    @foreach($cate->Topic as $tp)
+                    <?php $topic=DB::table('topic')->select('topic.*')->where('parent_id','=',$cate->id)->get();?>
+                @foreach($topic as $tp)
+
                     <li>
                         <a href="#"><i class="fa fa-cube fa-fw"></i>{{$tp->name}}<span class="fa arrow"></span></a>
 
                             <ul class="nav nav-third-level">
                                 <li>
-                                    <a href="{{Route('postlist',$tp->namedescript,$cate->namedescript,$tp->id)}}"><i class="fa fa-list-alt" aria-hidden="true"></i>Danh sách {{$tp->name}}</a>
+                                    <a href="{{Route('topicchildlist',[$tp->namedescript])}}"><i class="fa fa-list-alt" aria-hidden="true"></i>Danh sách {{$tp->name}}</a>
                                 </li>
                                 <li>
-                                    <a href="{{Route('addpost',$tp->namedescript,$cate->namedescript,$tp->id)}}"><i class="fa fa-plus" aria-hidden="true"></i>
+                                    <a href="{{Route('addtopicchild',[$tp->id,$tp->namedescript])}}"><i class="fa fa-plus" aria-hidden="true"></i>
                                         Thêm bài viết</a>
                                 </li>
                             </ul>
                     </li>
+
                     @endforeach
                 </ul>
 
