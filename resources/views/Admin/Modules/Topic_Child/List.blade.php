@@ -45,8 +45,10 @@
                             <th>Hiển thị menu</th>
                             <th>Chủ Đề Lớn</th>
                             <th>Xem Chi tiết</th>
-                            <th>Xóa</th>
-                            <th>Sửa</th>
+                            @if(Auth::user()->level==1)
+                                <th>Xóa</th>
+                                <th>Sửa</th>
+                            @endif
                         </tr>
                         </thead>
                         <tbody>
@@ -74,12 +76,14 @@
 
                                     </a>
                                 </td>
+                                @if(Auth::user()->level==1)
                                 <td class="center">
                                     <a href="delete/{{$tp->id}}" onclick="return confirmAction()"><i class="fa fa-ban" aria-hidden="true"></i>
                                     </a>
                                 </td>
                                 <td class="center"><a href="edit/{{ $tp->id }}"><i class="fa fa-pencil" aria-hidden="true"></i>
                                     </a></td>
+                                    @endif
                             </tr>
                         @endforeach
                         </tbody>

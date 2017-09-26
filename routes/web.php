@@ -1,5 +1,5 @@
 <?php
-Route::namespace('user')->middleware('auth')->group(function (){
+Route::namespace('user')->group(function (){
     Route::get('/',['as'=>'home','uses'=>'layoutController@home']);
     Route::get('user-login',['as'=>'getlogin','uses'=>'LoginController@GetLogin']);
     Route::post('user-login',['as'=>'getlogin','uses'=>'LoginController@PostLogin']);
@@ -11,12 +11,12 @@ Route::namespace('user')->middleware('auth')->group(function (){
     Route::post('edit_user_profile',['as'=>'edit_user_profile','uses'=>'userController@posteditprofile_info']);
     Route::get('changepassword',['as'=>'changepassword','uses'=>'userController@getChangePassword']);
     Route::post('changepassword','userController@postChangePassword');
+    /*Route::get('/{name}',['as'=>'getpostlist','uses'=>'Topic_Controller@GetTopicchild']);*/
     /*get post*/
     Route::prefix('post')->group(function (){
     Route::get('/{name}',['as'=>'getpostlist','uses'=>'Topic_Controller@GetTopicchild']);
 
     });
-
 });
 
 Route::namespace('admin')->group(function (){
@@ -47,11 +47,6 @@ Route::namespace('admin')->group(function (){
 
         });
         /*route topic child*/
- /*       Route::prefix('topicchild')->middleware('superadmin')->group(function (){
-            Route::get('{id}-{name}/list',['as'=>'topicchildlist','uses'=>'Topic_AdminController@GetListChild']);
-
-        });*/
-
         Route::prefix('topicchild')->middleware('superadmin')->group(function (){
             Route::get('{name}/list',['as'=>'topicchildlist','uses'=>'Topic_AdminController@GetListChild']);
             Route::get('{id}-{name}/add',['as'=>'addtopicchild','uses'=>'Topic_AdminController@GetAddChild']);
@@ -92,10 +87,6 @@ Route::namespace('admin')->group(function (){
 
 });
 
-Route::get('webcome',function (){
-        return view('welcome');
-});
-use App\Topic;
 Route::get('demo',function (){
     $topic=Topic::find(7);
     $cateparent=Topic::where('id','=',$topic->parent_id)->get();

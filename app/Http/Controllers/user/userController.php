@@ -58,7 +58,6 @@ class userController extends Controller
                 ]);
                 $users->email = $request->email;
             }
-            $users->level = $request->level;
             $users->biography = $request->biography;
             $users->save();
             return redirect('profile')->with('sucsses','Đã sửa thành công');
@@ -93,9 +92,6 @@ class userController extends Controller
                         'email.unique'  =>  'Email này đã được sử dụng',
                     ]);
                     $users->email = $request->email;
-                }
-                if(Auth::user()->id == 1) {
-                    $users->level = $request->level;
                 }
                 $users->biography = $request->biography;
                 $users->save();

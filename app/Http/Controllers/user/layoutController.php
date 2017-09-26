@@ -13,7 +13,11 @@ use App\post;
 use App\Http\Controllers\Controller;
 class layoutController extends Controller{
 
-
+public  function __construct()
+{
+    $category=Topic::where('parent_id','=',null)->get();
+    return view()->share('category',$category);
+}
 
     public function Category($slug){
         $category=Category::whereSlug($slug)->first();
@@ -22,9 +26,10 @@ class layoutController extends Controller{
         }else { return "Không tìm thấy file";}
     }
     public function home(){
-        $category=Topic::where('parent_id','=',null)->get();
         $post=post::all()->take(5);
-        return view('Layout.Layout',['category'=>$category,'post'=>$post]);
+        $category=Topic::where('parent_id','=',null)->get();
+
+        return view('User.Home.Home',['post'=>$post]);
     }
 
 }

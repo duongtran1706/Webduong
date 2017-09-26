@@ -7,8 +7,11 @@
  */
 ?>
 <!-- Header Top -->
-<div class='preloader'><div class='loaded'>&nbsp;</div></div>
-<header id="home" class="navbar-fixed-top">
+<div id="preloader">
+    <div id="status">&nbsp;</div>
+</div>
+<a class="scrollToTop" href="#"><i class="fa fa-angle-up"></i></a>
+<header id="header">
     <div class="header_top_menu clearfix">
         <div class="container">
             <div class="row">
@@ -19,9 +22,9 @@
                 </div>
                 <div class="col-md-4 col-sm-12">
                     <div class="head_top_social text-right">
-                        <a href=""><i class="fa fa-facebook"></i></a>
-                        <a href=""><i class="fa fa-google-plus"></i></a>
-                        <a href=""><i class="fa fa-twitter"></i></a>
+                        <a href="https://www.facebook.com/duongttIT"><i class="fa fa-facebook"></i></a>
+                        <a href="https://plus.google.com/u/1/102715176644454215926"><i class="fa fa-google-plus"></i></a>
+                        <a href="https://twitter.com/duongtran2004"><i class="fa fa-twitter"></i></a>
                         <a href=""><i class="fa fa-linkedin"></i></a>
                         <a href=""><i class="fa fa-youtube"></i></a>
                         <a href=""><i class="fa fa-camera"></i></a>
@@ -104,4 +107,9 @@
         </div>
     </div>
     <!-- End navbar-collapse-->
+    {{--add logo and search--}}
+    <div class="baner-logo">
+        <a style="height: 60px; width: 60px;" href="{{url('/')}}"><img style=" height: 60px; width: 60px " src="{{asset('images/logo.png')}}" alt="" /></a>
+
+    </div>
 <!-- Header Top End -->
